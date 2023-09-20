@@ -5,14 +5,19 @@ import 'package:sezon_app/core/constants/app_images.dart';
 import 'package:sezon_app/core/storage/storage.dart';
 import 'package:sezon_app/routes/routes.dart';
 
+import '../../core/storage/global.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   _start() async {
     await Future.delayed(3.seconds, () {
-      Storage.instance.hasData('user')
-          ? Get.offNamed(Routes.navigationScreen)
-          : Get.offNamed(Routes.loginScreen);
+      print(Global.user['role'] == 'user');
+      !(Storage.instance.hasData('user'))
+          ? Get.offNamed(Routes.loginScreen)
+          : Global.user['role'] == 'admin'
+              ? Get.offNamed(Routes.adminNavigationScreen)
+              : Get.offNamed(Routes.userNavigationScreen);
     });
   }
 

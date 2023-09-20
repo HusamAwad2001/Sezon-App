@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:sezon_app/view/widgets/snack.dart';
 
 import '../../core/constants/md5_encrypt.dart';
+import '../../core/storage/global.dart';
+import '../../core/storage/storage.dart';
 import '../../firebase/auth_helper.dart';
 import '../../models/user_model.dart';
 import '../../routes/routes.dart';
@@ -40,7 +42,10 @@ class LoginController extends GetxController {
       );
       bool isLoggedIn = await FirebaseAuthHelper.instance.login(userModel: userModel);
       if (isLoggedIn) {
-        Get.offAllNamed(Routes.navigationScreen);
+        await Storage.getData();
+        Global.user['role'] == 'admin'
+            ? Get.offAllNamed(Routes.adminNavigationScreen)
+            : Get.offAllNamed(Routes.userNavigationScreen);
         clear();
         isLoading.value = false;
       } else {

@@ -5,6 +5,7 @@ import 'package:sezon_app/core/storage/storage.dart';
 import 'package:sezon_app/firebase/auth_helper.dart';
 import 'package:sezon_app/models/user_model.dart';
 
+import '../../core/storage/global.dart';
 import '../../routes/routes.dart';
 import '../../view/widgets/snack.dart';
 
@@ -56,8 +57,11 @@ class RegisterController extends GetxController {
       );
       bool isRegister = await FirebaseAuthHelper.instance.register(userModel: userModel);
       if (isRegister) {
-        Get.offAllNamed(Routes.navigationScreen);
-        Storage.instance.write('user', userModel.toJson());
+        await Storage.instance.write('user', userModel.toJson());
+        Storage.getData();
+        Global.user['role'] == 'admin'
+            ? Get.offAllNamed(Routes.adminNavigationScreen)
+            : Get.offAllNamed(Routes.userNavigationScreen);
         clear();
         isLoading.value = false;
       } else {

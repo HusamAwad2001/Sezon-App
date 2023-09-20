@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:sezon_app/bindings/auth/login_binding.dart';
 import 'package:sezon_app/bindings/auth/otp_binding.dart';
 import 'package:sezon_app/bindings/auth/register_binding.dart';
+import 'package:sezon_app/view/screens/admin/navigaions/admin_navigation_screen.dart';
 import 'package:sezon_app/view/screens/auth/otp_screen.dart';
-import 'package:sezon_app/view/screens/navigaions/navigation_screen.dart';
 
 import '../routes/routes.dart';
 import '../view/screens/auth/login_screen.dart';
 import '../view/screens/auth/register_screen.dart';
 import '../view/screens/splash_screen.dart';
+import '../view/screens/user/navigaions/user_navigation_screen.dart';
 
 class Pages {
   static List<GetPage> getPages() {
@@ -37,8 +38,12 @@ class Pages {
       ),
 
       GetPage(
-        name: Routes.navigationScreen,
-        page: () => const NavigationScreen(),
+        name: Routes.userNavigationScreen,
+        page: () => const UserNavigationScreen(),
+      ),
+      GetPage(
+        name: Routes.adminNavigationScreen,
+        page: () => const AdminNavigationScreen(),
       ),
     ];
   }
