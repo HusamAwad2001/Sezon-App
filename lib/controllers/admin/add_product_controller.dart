@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sezon_app/firebase/fisestore_helper.dart';
+import 'package:sezon_app/models/product_model.dart';
 import 'package:sezon_app/view/widgets/snack.dart';
 
 import '../../core/constants/shared_functions.dart';
@@ -65,7 +67,27 @@ class AddProductController extends GetxController {
     }
 
     _validate();
+    update();
   }
 
-  _validate() {}
+  RxBool isLoading = false.obs;
+  _validate() async {
+    isLoading.value = true;
+    ProductModel model = ProductModel(
+      name: nameProductController.text,
+      description: descriptionProductController.text,
+      price: priceProductController.text.toString(),
+      category: selectCategoryController.text,
+    );
+    await FirestoreHelper.instance.addProduct(model, imageFile!).then((_) => clear());
+    isLoading.value = false;
+  }
+
+  clear() {
+    nameProductController.clear();
+    descriptionProductController.clear();
+    priceProductController.clear();
+    imageProductController.clear();
+    selectCategoryController.clear();
+  }
 }

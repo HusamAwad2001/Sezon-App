@@ -1,15 +1,22 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sezon_app/firebase/storage_helper.dart';
+import 'package:sezon_app/models/product_model.dart';
 import 'package:sezon_app/models/user_model.dart';
 
 import '../core/storage/storage.dart';
 import '../view/widgets/snack.dart';
 
 class FirestoreHelper {
-  FirestoreHelper._();
+  static final firebaseFirestore = FirebaseFirestore.instance;
+  static final instance = FirestoreHelper._internal();
 
-  static final instance = FirestoreHelper._();
-  final firebaseFirestore = FirebaseFirestore.instance;
+  factory FirestoreHelper() => instance;
 
+  FirestoreHelper._internal();
+
+  /// ----------------------------------------------------------------------------------------------
   /// Store user data in firestore
   Future<bool> setUserData(UserModel userModel) async {
     try {
@@ -27,6 +34,7 @@ class FirestoreHelper {
     }
   }
 
+  /// ----------------------------------------------------------------------------------------------
   /// Check if username or phone is exist
   Future<bool> checkUserNameOrPhone(String userName, String phone) async {
     try {
@@ -56,6 +64,7 @@ class FirestoreHelper {
     return false;
   }
 
+  /// ----------------------------------------------------------------------------------------------
   /// Get all users
   Future<bool> getAllUsers({required String phone, required String password}) async {
     try {
@@ -84,6 +93,24 @@ class FirestoreHelper {
     } catch (e) {
       Snack().show(type: false, message: 'حدث خطأ ما يرجى المحاولة مرة أخرى');
       print('error: $e');
+    }
+    return false;
+  }
+
+  /// ----------------------------------------------------------------------------------------------
+  /// Add product
+  Future<bool> addProduct(ProductModel productModel, File fileImg) async {
+    try {
+      ({bool status, String url}) uploaded =
+          await StorageHelper.instance.uploadImage('products', fileImg);
+      if (uploaded.status) {
+        productModel.imageUrl = uploaded.url;
+        await firebaseFirestore.collection('products').doc().set(productModel.toJson());
+      }
+      return true;
+    } catch (e) {
+      Snack().show(type: false, message: 'حدث خطأ ما يرجى المحاولة مرة أخرى');
+      print('Error: $e');
     }
     return false;
   }

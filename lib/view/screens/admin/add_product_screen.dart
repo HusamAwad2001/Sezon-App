@@ -11,6 +11,7 @@ import 'package:sezon_app/core/constants/shared_functions.dart';
 import 'package:sezon_app/view/widgets/app_button.dart';
 import 'package:sezon_app/view/widgets/custom_app_bar.dart';
 import 'package:sezon_app/view/widgets/custom_radio.dart';
+import 'package:sezon_app/view/widgets/loading_widget.dart';
 import 'package:sezon_app/view/widgets/title_bottom_sheet.dart';
 
 import '../../../core/constants/app_styles.dart';
@@ -51,11 +52,18 @@ class _BodyView extends GetView<AddProductController> {
 
           /// Button
           80.ph,
-          AppButton(
-            label: AppStrings.add,
-            onPressed: () {
-              scrollController.animateTo(0, duration: 400.milliseconds, curve: Curves.easeIn);
-              controller.addProduct();
+          Obx(
+            () {
+              return controller.isLoading.value
+                  ? const LoadingWidget()
+                  : AppButton(
+                      label: AppStrings.add,
+                      onPressed: () {
+                        scrollController.animateTo(0,
+                            duration: 400.milliseconds, curve: Curves.easeIn);
+                        controller.addProduct();
+                      },
+                    );
             },
           ),
           100.ph,
