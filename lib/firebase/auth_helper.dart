@@ -1,4 +1,5 @@
-import 'package:sezon_app/firebase/fisestore_helper.dart';
+import 'package:sezon_app/firebase/firestore/get_all_users.dart';
+import 'package:sezon_app/firebase/firestore/set_user_data.dart';
 import 'package:sezon_app/models/user_model.dart';
 
 class FirebaseAuthHelper {
@@ -7,7 +8,7 @@ class FirebaseAuthHelper {
 
   Future<bool> register({required UserModel userModel}) async {
     try {
-      bool isExist = await FirestoreHelper.instance.setUserData(userModel);
+      bool isExist = await SetUserData.call(userModel);
       return isExist;
     } catch (e) {
       print('Error: $e');
@@ -17,7 +18,7 @@ class FirebaseAuthHelper {
 
   Future<bool> login({required UserModel userModel}) async {
     try {
-      bool isLoggedIn = await FirestoreHelper.instance.getAllUsers(
+      bool isLoggedIn = await GetAllUsers.call(
         phone: userModel.phone,
         password: userModel.password,
       );

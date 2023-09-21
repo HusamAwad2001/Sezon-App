@@ -24,6 +24,7 @@ class HomeFragment extends GetView<AdminNavigationController> {
       children: [
         /// Search Bar
         AppTextField(
+          controller: controller.searchController,
           hintText: AppStrings.hintSearch,
           hintColor: AppColors.greyColor2,
           borderRadius: 10.r,
@@ -31,6 +32,15 @@ class HomeFragment extends GetView<AdminNavigationController> {
           enableBorderColor: Colors.transparent,
           focusBorderColor: Colors.transparent,
           prefix: SvgPicture.asset(AppImages.search, width: 20.w),
+          onChanged: (query) {
+            if (query.isNotEmpty || query != '') {
+              controller.isSearching = true;
+              controller.search(query);
+            } else {
+              controller.isSearching = false;
+            }
+            controller.update();
+          },
         ).paddingOnly(left: 16.w, right: 16.w, top: 20.h, bottom: 30.h),
 
         /// Tab Bar
@@ -61,7 +71,10 @@ class _TabBarView extends GetView<AdminNavigationController> {
               isScrollable: true,
               indicatorColor: Colors.black,
               onTap: (value) {
-                controller.selectedIndex = value;
+                controller.isSearching = false;
+                controller.searchController.clear();
+                controller.searchedProducts.clear();
+                controller.sectionIndex = value;
                 controller.getAllProducts();
               },
             ),
@@ -79,6 +92,7 @@ class _TabBarView extends GetView<AdminNavigationController> {
 
 class _ProductItem extends StatelessWidget {
   final ProductModel productModel;
+
   const _ProductItem(this.productModel, {super.key});
 
   @override
@@ -160,14 +174,30 @@ class _ListViewWidget extends GetView<AdminNavigationController> {
                 ? const Center(child: Text(AppStrings.somethingWentWrong))
                 : controller.products.isEmpty
                     ? const Center(child: Text(AppStrings.emptyProducts))
-                    : ListView.separated(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                        itemCount: controller.products.length,
-                        separatorBuilder: (context, index) => Divider(
-                          height: .1.h,
-                          color: AppColors.greyColor,
-                        ).paddingSymmetric(vertical: 10.h),
-                        itemBuilder: (context, index) => _ProductItem(controller.products[index]),
+                    : GetBuilder<AdminNavigationController>(
+                        builder: (_) {
+                          return (controller.isSearching == true &&
+                                  controller.searchedProducts.isEmpty)
+                              ? Center(
+                                  child: const Text(AppStrings.emptyProducts)
+                                      .paddingOnly(bottom: 130.h),
+                                )
+                              : ListView.separated(
+                                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                                  itemCount: controller.isSearching
+                                      ? controller.searchedProducts.length
+                                      : controller.products.length,
+                                  separatorBuilder: (context, index) => Divider(
+                                    height: .1.h,
+                                    color: AppColors.greyColor,
+                                  ).paddingSymmetric(vertical: 10.h),
+                                  itemBuilder: (context, index) {
+                                    return controller.isSearching
+                                        ? _ProductItem(controller.searchedProducts[index])
+                                        : _ProductItem(controller.products[index]);
+                                  },
+                                );
+                        },
                       );
       },
     );

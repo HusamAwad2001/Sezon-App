@@ -28,6 +28,7 @@ class AppTextField extends StatelessWidget {
     this.cursorColor,
     this.textColor,
     this.suffix,
+    this.onChanged,
     this.maxLines = 1,
     this.minLines = 1,
     this.maxLength = 255,
@@ -57,6 +58,7 @@ class AppTextField extends StatelessWidget {
   final int maxLines;
   final int minLines;
   final int maxLength;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +73,7 @@ class AppTextField extends StatelessWidget {
       onTapOutside: (_) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      onChanged: onChanged,
       style: TextStyle(color: textColor ?? Colors.black, fontSize: labelSize ?? 14.sp),
       cursorColor: hintColor ?? AppColors.primaryColor,
       decoration: InputDecoration(

@@ -14,6 +14,7 @@ class AdminNavigationScreen extends GetView<AdminNavigationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: Size(Get.width, 80.h),
         child: SafeArea(

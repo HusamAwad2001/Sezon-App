@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sezon_app/firebase/fisestore_helper.dart';
-import 'package:sezon_app/models/product_model.dart';
+import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/view/widgets/snack.dart';
 
 import '../../core/constants/shared_functions.dart';
+import '../../firebase/firestore/add_product.dart';
+import '../../models/product_model.dart';
 import '../../models/radio_option.dart';
 
 class AddProductController extends GetxController {
@@ -80,7 +81,12 @@ class AddProductController extends GetxController {
       purchases: 0,
       category: selectCategoryController.text,
     );
-    await FirestoreHelper.instance.addProduct(model, imageFile!).then((_) => clear());
+    await AddProduct.call(model, imageFile!).then((_) {
+      clear();
+      Snack().show(type: true, message: AppStrings.successMessage);
+    }).catchError((e) {
+      Snack().show(type: false, message: AppStrings.somethingWentWrong);
+    });
     isLoading.value = false;
   }
 
