@@ -11,8 +11,6 @@ import 'package:sezon_app/view/widgets/auth/exist_account.dart';
 import 'package:sezon_app/view/widgets/auth/image_clipper.dart';
 import 'package:sezon_app/view/widgets/loading_widget.dart';
 
-import '../../../core/constants/app_colors.dart';
-
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -56,7 +54,6 @@ class _BodyView extends GetView<RegisterController> {
             hintText: AppStrings.hintUserName,
             label: AppStrings.userName,
             textColor: Colors.black,
-            borderColor: AppColors.primaryColor,
           ),
           15.ph,
           AppTextField(
@@ -65,7 +62,6 @@ class _BodyView extends GetView<RegisterController> {
             hintText: AppStrings.hintPhoneNumber,
             label: AppStrings.phoneNumber,
             textColor: Colors.black,
-            borderColor: AppColors.primaryColor,
           ),
           15.ph,
           AppTextField(
@@ -74,7 +70,6 @@ class _BodyView extends GetView<RegisterController> {
             hintText: AppStrings.hintPassword,
             label: AppStrings.password,
             textColor: Colors.black,
-            borderColor: AppColors.primaryColor,
           ),
           15.ph,
           AppTextField(
@@ -83,7 +78,6 @@ class _BodyView extends GetView<RegisterController> {
             hintText: AppStrings.hintPassword,
             label: AppStrings.confirmPassword,
             textColor: Colors.black,
-            borderColor: AppColors.primaryColor,
           ),
           30.ph,
 

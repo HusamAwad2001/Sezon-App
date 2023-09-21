@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>NSCameraUsageDescription</key>
+    <string>Used to capture photos and videos.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Used to access photos and videos for uploading.</string>
 </dict>
 </plist>

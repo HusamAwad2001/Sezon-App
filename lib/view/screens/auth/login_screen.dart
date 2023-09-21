@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sezon_app/controllers/auth/login_controller.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
 import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/core/constants/app_styles.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
@@ -53,10 +52,10 @@ class _BodyView extends GetView<LoginController> {
         /// Text Fields
         AppTextField(
           controller: controller.phoneController,
+          textInputType: TextInputType.phone,
           hintText: AppStrings.hintPhoneNumber,
           label: AppStrings.phoneNumber,
           textColor: Colors.black,
-          borderColor: AppColors.primaryColor,
         ),
         15.ph,
         AppTextField(
@@ -65,7 +64,6 @@ class _BodyView extends GetView<LoginController> {
           hintText: AppStrings.hintPassword,
           label: AppStrings.password,
           textColor: Colors.black,
-          borderColor: AppColors.primaryColor,
         ),
         5.ph,
 

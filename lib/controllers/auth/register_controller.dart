@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/md5_encrypt.dart';
+import 'package:sezon_app/core/constants/shared_functions.dart';
 import 'package:sezon_app/core/storage/storage.dart';
 import 'package:sezon_app/firebase/auth_helper.dart';
 import 'package:sezon_app/models/user_model.dart';

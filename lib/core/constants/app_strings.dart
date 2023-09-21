@@ -17,4 +17,23 @@ class AppStrings {
   static const String verificationCode = 'رمز التحقق';
   static const String descriptionOtp = 'لقد قمنا بارسال رمز التحقق إلى هذا\nالرقم';
   static const String send = 'أرسل';
+  static const String add = 'اضافة';
+  static const String next = 'التالي';
+  static const String home = 'الرئيسية';
+  static const String sales = 'المبيعات';
+  static const String notifications = 'الاشعارات';
+  static const String profile = 'الملف الشخصي';
+  static const String hintSearch = 'كلمة البحث هنا...';
+  static const String addProduct = 'اضافة منتج';
+  static const String addNewProduct = 'اضافة منتج جديد';
+  static const String productTitle = 'اسم المنتج';
+  static const String hintProductTitle = 'خزف ملون صنع يدوي';
+  static const String productDescription = 'وصف المنتج';
+  static const String hintProductDescription = 'مثال: منتج تم صناعته بافضل الخامات...';
+  static const String price = 'السعر';
+  static const String hintPrice = '130ر.س';
+  static const String addProductImg = 'اضافة صورة المنتج';
+  static const String hintAddProductImg = 'ارفق صورة';
+  static const String selectProductCategory = 'اختر فئة المنتج';
+  static const String hintSelectProductCategory = 'اكسسوارات';
 }

@@ -13,9 +13,11 @@ class AppTextField extends StatelessWidget {
     this.hintSize,
     this.backgroundColor,
     this.borderRadius = 5,
-    this.borderColor,
+    this.enableBorderColor,
+    this.focusBorderColor,
     this.focusedBorderColor,
     this.isPassword = false,
+    this.isEnabled = true,
     this.controller,
     this.textInputAction = TextInputAction.done,
     this.textInputType = TextInputType.text,
@@ -37,12 +39,14 @@ class AppTextField extends StatelessWidget {
   final double? hintSize;
   final Color? backgroundColor;
   final double borderRadius;
-  final Color? borderColor;
+  final Color? enableBorderColor;
+  final Color? focusBorderColor;
   final Color? focusedBorderColor;
   final Color? hintColor;
   final Color? cursorColor;
   final Color? textColor;
   final bool isPassword;
+  final bool isEnabled;
   final TextEditingController? controller;
   final TextInputAction textInputAction;
   final TextInputType textInputType;
@@ -70,27 +74,34 @@ class AppTextField extends StatelessWidget {
       style: TextStyle(color: textColor ?? Colors.black, fontSize: labelSize ?? 14.sp),
       cursorColor: hintColor ?? AppColors.primaryColor,
       decoration: InputDecoration(
-        hintStyle: TextStyle(color: hintColor ?? AppColors.hintColor, fontSize: hintSize ?? 14.sp),
+        enabled: isEnabled,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        hintStyle: TextStyle(color: hintColor ?? AppColors.hintColor, fontSize: hintSize ?? 11.sp),
         hintText: hintText,
         labelStyle: getRegularStyle(
           color: AppColors.primaryColor,
           fontSize: 12.sp,
         ),
         // labelText: label,
-        label: Text(
-          label ?? '',
-          style: getRegularStyle(
-            color: AppColors.primaryColor,
-            fontSize: 12.sp,
-          ),
-        ).paddingSymmetric(horizontal: 8.w),
+        label: label != null
+            ? Text(
+                label!,
+                style: getRegularStyle(
+                  color: AppColors.primaryColor,
+                  fontSize: 12.sp,
+                ),
+              ).paddingSymmetric(horizontal: 5.w)
+            : null,
         counter: const SizedBox.shrink(),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: const BorderSide(color: AppColors.hintColor)),
+            borderSide: BorderSide(color: enableBorderColor ?? AppColors.hintColor)),
+        disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            borderSide: BorderSide(color: enableBorderColor ?? AppColors.hintColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: const BorderSide(color: AppColors.primaryColor)),
+            borderSide: BorderSide(color: focusBorderColor ?? AppColors.primaryColor)),
         filled: true,
         prefixIcon: prefix == null
             ? const SizedBox()

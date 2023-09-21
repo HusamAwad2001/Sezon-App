@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sezon_app/view/widgets/snack.dart';
 
-import '../../core/constants/md5_encrypt.dart';
+import '../../core/constants/shared_functions.dart';
 import '../../core/storage/global.dart';
 import '../../core/storage/storage.dart';
 import '../../firebase/auth_helper.dart';

@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Storage.getData();
-  print(Global.user['role']);
+  print(Global.user);
   runApp(const MyApp());
 }
 
