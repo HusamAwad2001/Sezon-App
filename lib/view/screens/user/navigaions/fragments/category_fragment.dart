@@ -6,6 +6,7 @@ import 'package:sezon_app/controllers/user/user_navigation_controller.dart';
 import 'package:sezon_app/core/constants/app_colors.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
 
+import '../../../../../controllers/user/favorite_controller.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/constants/app_styles.dart';
 import '../../../../../models/product_model.dart';
@@ -138,6 +139,7 @@ class _ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FavoriteController favoriteController = Get.put(FavoriteController());
     return Stack(
       children: [
         Container(
@@ -188,17 +190,26 @@ class _ProductItem extends StatelessWidget {
         Positioned(
           top: 16.h,
           left: 16.w,
-          child: Container(
-            padding: EdgeInsets.all(4.w),
-            decoration: ShapeDecoration(
-              shape: const OvalBorder(),
-              color: Colors.white.withOpacity(0.2),
-            ),
-            alignment: Alignment.center,
-            child: Icon(
-              Icons.favorite,
-              color: const Color(0xFFDEDFDF),
-              size: 10.w,
+          child: GestureDetector(
+            onTap: () {
+              favoriteController.addOrDeleteProduct(productModel);
+              Get.find<UserNavigationController>().update();
+            },
+            child: Container(
+              padding: EdgeInsets.all(4.w),
+              decoration: ShapeDecoration(
+                shape: const OvalBorder(),
+                color: Colors.white.withOpacity(0.2),
+              ),
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.favorite,
+                size: 10.w,
+                color: favoriteController.favoritesList
+                        .any((element) => element['id'] == productModel.id)
+                    ? Colors.red
+                    : const Color(0xFFDEDFDF),
+              ),
             ),
           ),
         ),

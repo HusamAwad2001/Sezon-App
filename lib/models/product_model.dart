@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class ProductModel {
   String? id;
   final String name;
@@ -8,7 +6,7 @@ class ProductModel {
   String? imageUrl;
   final String category;
   int? purchases;
-  Timestamp? createdAt;
+  String? createdAt;
 
   ProductModel({
     this.id,
@@ -43,7 +41,7 @@ class ProductModel {
       'imageUrl': imageUrl,
       'category': category,
       'purchases': purchases,
-      'createdAt': DateTime.now(),
+      'createdAt': DateTime.now().toString(),
     };
   }
 }

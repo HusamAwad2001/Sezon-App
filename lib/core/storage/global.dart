@@ -7,6 +7,6 @@ class Global {
 
   Global._internal();
 
-  static String token = "";
   static Map user = {};
+  static List favorites = [];
 }

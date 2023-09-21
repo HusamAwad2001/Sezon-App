@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sezon_app/controllers/user/favorite_controller.dart';
 import 'package:sezon_app/controllers/user/user_navigation_controller.dart';
 import 'package:sezon_app/core/constants/app_styles.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
@@ -156,6 +157,7 @@ class _ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FavoriteController favoriteController = Get.put(FavoriteController());
     return Stack(
       children: [
         Container(
@@ -192,12 +194,12 @@ class _ProductItem extends StatelessWidget {
               ),
               10.ph,
               Text(
-                'رسم على خشب',
+                productModel.name,
                 style: getMediumStyle(fontSize: 9.sp),
               ),
               5.ph,
               Text(
-                '130 ر.س',
+                '${productModel.price} ر.س',
                 style: getBoldStyle(fontSize: 10.sp, color: AppColors.primaryColor),
               ),
             ],
@@ -206,16 +208,25 @@ class _ProductItem extends StatelessWidget {
         Positioned(
           top: 16.h,
           left: 16.w,
-          child: Container(
-            padding: EdgeInsets.all(6.w),
-            decoration: ShapeDecoration(
-              shape: const OvalBorder(),
-              color: Colors.white.withOpacity(0.2),
-            ),
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.favorite,
-              color: Color(0xFFDEDFDF),
+          child: GestureDetector(
+            onTap: () {
+              favoriteController.addOrDeleteProduct(productModel);
+              Get.find<UserNavigationController>().update();
+            },
+            child: Container(
+              padding: EdgeInsets.all(6.w),
+              decoration: ShapeDecoration(
+                shape: const OvalBorder(),
+                color: Colors.white.withOpacity(0.2),
+              ),
+              alignment: Alignment.center,
+              child: Icon(
+                Icons.favorite,
+                color: favoriteController.favoritesList
+                        .any((element) => element['id'] == productModel.id)
+                    ? Colors.red
+                    : const Color(0xFFDEDFDF),
+              ),
             ),
           ),
         ),

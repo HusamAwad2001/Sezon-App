@@ -16,8 +16,8 @@ class Storage {
     if (instance.hasData('user')) {
       Global.user = instance.read('user');
     }
-    if (instance.hasData('token')) {
-      Global.token = instance.read('token');
+    if (instance.hasData('favorites')) {
+      Global.favorites = instance.read('favorites');
     }
   }
 }

@@ -48,6 +48,7 @@ class AppStrings {
   static const String somethingWentWrong = 'حدث خطأ ما يرجى المحاولة مرة أخرى';
   static const String successMessage = 'تمت العملية بنجاح';
   static const String emptyProducts = 'لا يوجد منتجات';
+  static const String emptyFavorites = 'لا يوجد منتجات مفضلة';
   static const String purchases = 'عمليات الشراء';
   static const String productDetails = 'تفاصيل المنتج';
   static const String productCategory = 'فئة المنتج';

@@ -80,7 +80,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               3.ph,
               Text(
-                productModel.createdAt!.toDate().toString().substring(0, 10),
+                productModel.createdAt!.toString().substring(0, 10),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: getRegularStyle(fontSize: 11.sp),
