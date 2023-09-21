@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sezon_app/core/constants/app_themes.dart';
-import 'package:sezon_app/core/storage/global.dart';
 import 'package:sezon_app/firebase_options.dart';
 
 import '../routes/pages.dart';
@@ -19,7 +18,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Storage.getData();
-  print(Global.user);
   runApp(const MyApp());
 }
 

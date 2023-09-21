@@ -6,6 +6,7 @@ import 'package:sezon_app/bindings/auth/otp_binding.dart';
 import 'package:sezon_app/bindings/auth/register_binding.dart';
 import 'package:sezon_app/view/screens/admin/add_product_screen.dart';
 import 'package:sezon_app/view/screens/admin/navigaions/admin_navigation_screen.dart';
+import 'package:sezon_app/view/screens/admin/product_details_screen.dart';
 import 'package:sezon_app/view/screens/auth/otp_screen.dart';
 
 import '../routes/routes.dart';
@@ -56,6 +57,10 @@ class Pages {
         name: Routes.addProductScreen,
         page: () => const AddProductScreen(),
         binding: AddProductBinding(),
+      ),
+      GetPage(
+        name: Routes.productDetailsScreen,
+        page: () => const ProductDetailsScreen(),
       ),
     ];
   }

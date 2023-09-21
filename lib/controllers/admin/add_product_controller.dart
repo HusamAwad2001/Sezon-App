@@ -77,6 +77,7 @@ class AddProductController extends GetxController {
       name: nameProductController.text,
       description: descriptionProductController.text,
       price: priceProductController.text.toString(),
+      purchases: 0,
       category: selectCategoryController.text,
     );
     await FirestoreHelper.instance.addProduct(model, imageFile!).then((_) => clear());

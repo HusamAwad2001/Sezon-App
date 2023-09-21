@@ -36,4 +36,10 @@ class AppStrings {
   static const String hintAddProductImg = 'ارفق صورة';
   static const String selectProductCategory = 'اختر فئة المنتج';
   static const String hintSelectProductCategory = 'اكسسوارات';
+  static const String somethingWentWrong = 'حدث خطأ ما يرجى المحاولة مرة أخرى';
+  static const String emptyProducts = 'لا يوجد منتجات';
+  static const String purchases = 'عمليات الشراء';
+  static const String productDetails = 'تفاصيل المنتج';
+  static const String productCategory = 'فئة المنتج';
+  static const String dateAdded = 'تاريخ الاضافة';
 }

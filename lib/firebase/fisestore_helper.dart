@@ -114,4 +114,25 @@ class FirestoreHelper {
     }
     return false;
   }
+
+  /// ----------------------------------------------------------------------------------------------
+  /// Add product
+  Future<(List<ProductModel> products, bool status)> getAllProducts(String category) async {
+    try {
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await firebaseFirestore
+          .collection('products')
+          .where('category', isEqualTo: category)
+          .get();
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = querySnapshot.docs;
+      List<ProductModel>? details = documents.map((e) {
+        ProductModel productModel = ProductModel.fromJson(e.data());
+        productModel.id = e.id;
+        return productModel;
+      }).toList();
+      return (details, true);
+    } catch (e) {
+      print('error: $e');
+      return ([].cast<ProductModel>(), false);
+    }
+  }
 }

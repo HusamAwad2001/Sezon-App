@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProductModel {
   String? id;
   final String name;
@@ -5,6 +7,8 @@ class ProductModel {
   final String price;
   String? imageUrl;
   final String category;
+  int? purchases;
+  Timestamp? createdAt;
 
   ProductModel({
     this.id,
@@ -13,6 +17,8 @@ class ProductModel {
     required this.price,
     this.imageUrl,
     required this.category,
+    this.purchases,
+    this.createdAt,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +29,8 @@ class ProductModel {
       price: json['price'],
       imageUrl: json['imageUrl'],
       category: json['category'],
+      purchases: json['purchases'],
+      createdAt: json['createdAt'],
     );
   }
 
@@ -34,6 +42,7 @@ class ProductModel {
       'price': price,
       'imageUrl': imageUrl,
       'category': category,
+      'purchases': purchases,
       'createdAt': DateTime.now(),
     };
   }
