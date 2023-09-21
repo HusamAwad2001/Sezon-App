@@ -98,7 +98,7 @@ class _ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.productDetailsScreen, arguments: productModel),
+      onTap: () => Get.toNamed(Routes.adminProductDetailsScreen, arguments: productModel),
       child: Container(
         color: Colors.transparent,
         child: Row(

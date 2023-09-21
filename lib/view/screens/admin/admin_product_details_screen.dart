@@ -11,8 +11,8 @@ import 'package:sezon_app/view/widgets/custom_app_bar.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../widgets/loading_widget.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+class AdminProductDetailsScreen extends StatelessWidget {
+  const AdminProductDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sezon_app/controllers/admin/admin_navigation_controller.dart';
 import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/view/widgets/snack.dart';
 
@@ -84,6 +85,7 @@ class AddProductController extends GetxController {
     await AddProduct.call(model, imageFile!).then((_) {
       clear();
       Snack().show(type: true, message: AppStrings.successMessage);
+      Get.find<AdminNavigationController>().getAllProducts();
     }).catchError((e) {
       Snack().show(type: false, message: AppStrings.somethingWentWrong);
     });

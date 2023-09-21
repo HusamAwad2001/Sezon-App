@@ -5,8 +5,8 @@ import 'package:sezon_app/bindings/auth/login_binding.dart';
 import 'package:sezon_app/bindings/auth/otp_binding.dart';
 import 'package:sezon_app/bindings/auth/register_binding.dart';
 import 'package:sezon_app/view/screens/admin/add_product_screen.dart';
+import 'package:sezon_app/view/screens/admin/admin_product_details_screen.dart';
 import 'package:sezon_app/view/screens/admin/navigaions/admin_navigation_screen.dart';
-import 'package:sezon_app/view/screens/admin/product_details_screen.dart';
 import 'package:sezon_app/view/screens/auth/otp_screen.dart';
 
 import '../routes/routes.dart';
@@ -14,6 +14,7 @@ import '../view/screens/auth/login_screen.dart';
 import '../view/screens/auth/register_screen.dart';
 import '../view/screens/splash_screen.dart';
 import '../view/screens/user/navigaions/user_navigation_screen.dart';
+import '../view/screens/user/user_product_details_screen.dart';
 
 class Pages {
   static List<GetPage> getPages() {
@@ -46,6 +47,10 @@ class Pages {
         name: Routes.userNavigationScreen,
         page: () => const UserNavigationScreen(),
       ),
+      GetPage(
+        name: Routes.userProductDetailsScreen,
+        page: () => const UserProductDetailsScreen(),
+      ),
 
       /// Admin Screens
       GetPage(
@@ -59,8 +64,8 @@ class Pages {
         binding: AddProductBinding(),
       ),
       GetPage(
-        name: Routes.productDetailsScreen,
-        page: () => const ProductDetailsScreen(),
+        name: Routes.adminProductDetailsScreen,
+        page: () => const AdminProductDetailsScreen(),
       ),
     ];
   }

@@ -10,6 +10,7 @@ import '../../../../../controllers/user/favorite_controller.dart';
 import '../../../../../core/constants/app_strings.dart';
 import '../../../../../core/constants/app_styles.dart';
 import '../../../../../models/product_model.dart';
+import '../../../../../routes/routes.dart';
 import '../../../../widgets/loading_widget.dart';
 
 class CategoryFragment extends StatelessWidget {
@@ -142,49 +143,60 @@ class _ProductItem extends StatelessWidget {
     FavoriteController favoriteController = Get.put(FavoriteController());
     return Stack(
       children: [
-        Container(
-          padding: EdgeInsets.all(10.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(5.r),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 10,
-                color: Colors.black.withOpacity(0.20),
-              ),
-            ],
-          ),
-          alignment: Alignment.center,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Image.asset(AppImages.category4),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5.r),
-                child: CachedNetworkImage(
-                  height: 80.h,
-                  imageUrl: productModel.imageUrl!,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const LoadingWidget(),
-                  errorWidget: (context, url, error) => Center(
-                    child: Icon(
-                      Icons.error,
-                      size: 30.w,
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(
+              Routes.userProductDetailsScreen,
+              arguments: {
+                'productModel': productModel,
+                'products': Get.find<UserNavigationController>().products,
+              },
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(10.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5.r),
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: Colors.black.withOpacity(0.20),
+                ),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Image.asset(AppImages.category4),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5.r),
+                  child: CachedNetworkImage(
+                    height: 80.h,
+                    imageUrl: productModel.imageUrl!,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const LoadingWidget(),
+                    errorWidget: (context, url, error) => Center(
+                      child: Icon(
+                        Icons.error,
+                        size: 30.w,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              10.ph,
-              Text(
-                'رسم على خشب',
-                style: getMediumStyle(fontSize: 8.sp),
-              ),
-              5.ph,
-              Text(
-                '130 ر.س',
-                style: getBoldStyle(fontSize: 8.sp, color: AppColors.primaryColor),
-              ),
-            ],
+                10.ph,
+                Text(
+                  productModel.name,
+                  style: getMediumStyle(fontSize: 8.sp),
+                ),
+                5.ph,
+                Text(
+                  '${productModel.price} ر.س',
+                  style: getBoldStyle(fontSize: 8.sp, color: AppColors.primaryColor),
+                ),
+              ],
+            ),
           ),
         ),
         Positioned(

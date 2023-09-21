@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
       child: prefix == null
           ? Text(
               label,
-              style: style ?? getBoldStyle(color: Colors.white, fontSize: 14.sp),
+              style: style ?? getBoldStyle(color: textColor ?? Colors.white, fontSize: 14.sp),
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,

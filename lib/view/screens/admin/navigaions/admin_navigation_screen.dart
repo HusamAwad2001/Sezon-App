@@ -8,11 +8,12 @@ import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/core/constants/app_styles.dart';
 import 'package:sezon_app/routes/routes.dart';
 
-class AdminNavigationScreen extends GetView<AdminNavigationController> {
+class AdminNavigationScreen extends StatelessWidget {
   const AdminNavigationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Get.put(AdminNavigationController());
     return GetBuilder(
       init: AdminNavigationController(),
       builder: (controller) {

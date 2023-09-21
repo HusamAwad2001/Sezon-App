@@ -18,6 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Storage.getData();
+  // Storage.instance.remove('user');
   runApp(const MyApp());
 }
 
