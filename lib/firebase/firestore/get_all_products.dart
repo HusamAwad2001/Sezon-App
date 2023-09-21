@@ -10,7 +10,10 @@ class GetAllProducts {
           .collection('products')
           .where('category', isEqualTo: category)
           .get();
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = querySnapshot.docs;
+      QuerySnapshot<Map<String, dynamic>> querySnapshot2 =
+          await FirestoreHelper.firestore.collection('products').get();
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
+          category == '' ? querySnapshot2.docs : querySnapshot.docs;
       List<ProductModel>? details = documents.map((e) {
         ProductModel productModel = ProductModel.fromJson(e.data());
         productModel.id = e.id;

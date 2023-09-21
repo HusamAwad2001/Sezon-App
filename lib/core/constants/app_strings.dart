@@ -23,6 +23,15 @@ class AppStrings {
   static const String sales = 'المبيعات';
   static const String notifications = 'الاشعارات';
   static const String profile = 'الملف الشخصي';
+  static const String products = 'المنتجات';
+  static const String categories = 'الفئات';
+  static const String category1 = 'الخزف';
+  static const String category2 = 'الأكاليل';
+  static const String category3 = 'المطرزات';
+  static const String category4 = 'خشبيات';
+  static const String category5 = 'اكسسوارات';
+  static const String cart = 'طلباتي';
+  static const String favorite = 'المفضلة';
   static const String hintSearch = 'كلمة البحث هنا...';
   static const String addProduct = 'اضافة منتج';
   static const String addNewProduct = 'اضافة منتج جديد';

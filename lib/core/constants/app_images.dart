@@ -9,6 +9,15 @@ class AppImages {
   static const String notification = '$_path/notification.png';
   static const String profile = '$_path/profile.png';
   static const String notificationImage = '$_path/notification_image.png';
+  static const String category = '$_path/category.png';
+  static const String category1 = '$_path/category1.png';
+  static const String category2 = '$_path/category2.png';
+  static const String category3 = '$_path/category3.png';
+  static const String category4 = '$_path/category4.png';
+  static const String category5 = '$_path/category5.png';
+  static const String favorite = '$_path/favorite.png';
+  static const String cart = '$_path/cart.png';
+  static const String avatar = '$_path/avatar.png';
 
   /// SVG
   static const String _svgPath = 'assets/svg';

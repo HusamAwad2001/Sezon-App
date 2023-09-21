@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
 
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_strings.dart';
 import '../../core/constants/app_styles.dart';
 
 class CustomTitle extends StatelessWidget {
@@ -26,7 +25,7 @@ class CustomTitle extends StatelessWidget {
         ),
         10.pw,
         Text(
-          AppStrings.addNewProduct,
+          title,
           style: getMediumStyle(
             fontSize: 15.sp,
           ),

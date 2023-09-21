@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 
 import '../../core/constants/app_styles.dart';
 
-PreferredSize customAppBar({Widget? suffix, required String title, bool isBack = false}) {
+PreferredSize customAppBar(
+    {Widget? suffix, Widget? prefix, required String title, bool isBack = false}) {
   return PreferredSize(
     preferredSize: Size(Get.width, 80.h),
     child: SafeArea(
@@ -24,12 +25,13 @@ PreferredSize customAppBar({Widget? suffix, required String title, bool isBack =
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             !isBack
-                ? SizedBox(
-                    child: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.transparent,
-                    ).paddingAll(10),
-                  )
+                ? prefix ??
+                    SizedBox(
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.transparent,
+                      ).paddingAll(10),
+                    )
                 : IconButton(
                     onPressed: () => Get.back(),
                     icon: const Icon(Icons.arrow_back_ios).paddingAll(10),

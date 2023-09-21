@@ -13,54 +13,44 @@ class AdminNavigationScreen extends GetView<AdminNavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: PreferredSize(
-        preferredSize: Size(Get.width, 80.h),
-        child: SafeArea(
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(.25),
-                  blurRadius: .5,
-                  offset: const Offset(0, .5),
+    return GetBuilder(
+      init: AdminNavigationController(),
+      builder: (controller) {
+        return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: PreferredSize(
+            preferredSize: Size(Get.width, 80.h),
+            child: SafeArea(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.25),
+                      blurRadius: .5,
+                      offset: const Offset(0, .5),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            alignment: Alignment.center,
-            child: GetBuilder<AdminNavigationController>(
-              builder: (_) {
-                return Text(
+                alignment: Alignment.center,
+                child: Text(
                   controller.titleFragments[controller.selectedIndex],
                   style: getBoldStyle(fontSize: 16.sp),
-                );
-              },
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-      body: GetBuilder<AdminNavigationController>(
-        builder: (_) {
-          return IndexedStack(
-            index: controller.selectedIndex,
-            children: controller.fragments,
-          );
-        },
-      ),
-      floatingActionButton: controller.selectedIndex == 0
-          ? FloatingActionButton(
-              onPressed: () => Get.toNamed(Routes.addProductScreen),
-              shape: const CircleBorder(),
-              backgroundColor: AppColors.primaryColor,
-              elevation: 0,
-              child: Icon(Icons.add, color: Colors.white, size: 30.w),
-            )
-          : const SizedBox(),
-      bottomNavigationBar: GetBuilder<AdminNavigationController>(
-        builder: (_) {
-          return BottomNavigationBar(
+          body: IndexedStack(index: controller.selectedIndex, children: controller.fragments),
+          floatingActionButton: controller.selectedIndex == 0
+              ? FloatingActionButton(
+                  onPressed: () => Get.toNamed(Routes.addProductScreen),
+                  shape: const CircleBorder(),
+                  backgroundColor: AppColors.primaryColor,
+                  elevation: 0,
+                  child: Icon(Icons.add, color: Colors.white, size: 30.w),
+                )
+              : const SizedBox(),
+          bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,
             currentIndex: controller.selectedIndex,
@@ -117,9 +107,9 @@ class AdminNavigationScreen extends GetView<AdminNavigationController> {
                 label: AppStrings.profile,
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
