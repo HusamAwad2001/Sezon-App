@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../../widgets/custom_app_bar.dart';
+import 'package:sezon_app/core/storage/storage.dart';
+import 'package:sezon_app/routes/routes.dart';
 
 import '../../../../controllers/user/user_navigation_controller.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_images.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/constants/app_styles.dart';
+import '../../../widgets/custom_app_bar.dart';
 
 class UserNavigationScreen extends GetView<UserNavigationController> {
   const UserNavigationScreen({Key? key}) : super(key: key);
@@ -19,8 +21,7 @@ class UserNavigationScreen extends GetView<UserNavigationController> {
       builder: (controller) {
         return Scaffold(
           appBar: _appBar(controller),
-          body: IndexedStack(
-              index: controller.selectedIndex, children: controller.fragments),
+          body: IndexedStack(index: controller.selectedIndex, children: controller.fragments),
           bottomNavigationBar: _buildBottomNavigationBar(controller),
         );
       },
@@ -32,10 +33,14 @@ class UserNavigationScreen extends GetView<UserNavigationController> {
 PreferredSizeWidget _appBar(UserNavigationController controller) {
   return customAppBar(
     title: controller.titleFragments[controller.selectedIndex],
-    prefix: Image.asset(AppImages.avatar, width: 30.w, height: 30.h)
-        .paddingOnly(right: 24.w),
-    suffix: Image.asset(AppImages.notification, width: 24.w, height: 24.h)
-        .paddingOnly(left: 24.w),
+    prefix: Image.asset(AppImages.avatar, width: 30.w, height: 30.h).paddingOnly(right: 24.w),
+    suffix: GestureDetector(
+      onTap: () {
+        Storage.instance.remove('user');
+        Get.offAllNamed(Routes.loginScreen);
+      },
+      child: const Icon(Icons.logout).paddingOnly(left: 24.w),
+    ),
     isShadow: controller.selectedIndex == 2 ? false : true,
   );
 }

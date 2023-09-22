@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../../../../../controllers/admin/admin_navigation_controller.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_images.dart';
 import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/constants/app_styles.dart';
 import '../../../../../core/constants/empty_padding.dart';
 import '../../../../../models/product_model.dart';
 import '../../../../../routes/routes.dart';
 import '../../../../widgets/app_text_field.dart';
 import '../../../../widgets/loading_widget.dart';
-
-import '../../../../../core/constants/app_styles.dart';
 
 class HomeFragment extends GetView<AdminNavigationController> {
   const HomeFragment({Key? key}) : super(key: key);
@@ -70,8 +70,7 @@ class _TabBar extends GetView<AdminNavigationController> {
               tabs: controller.tabsSections.map(
                 (e) {
                   return Tab(
-                    child: Text(e.toString(),
-                        style: getMediumStyle(fontSize: 13.sp)),
+                    child: Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
                   );
                 },
               ).toList(),
@@ -89,9 +88,7 @@ class _TabBar extends GetView<AdminNavigationController> {
             ),
             Expanded(
               child: TabBarView(
-                children: controller.tabsSections
-                    .map((e) => const _CheckTabBar())
-                    .toList(),
+                children: controller.tabsSections.map((e) => const _CheckTabBar()).toList(),
               ),
             ),
           ],
@@ -116,8 +113,7 @@ class _CheckTabBar extends GetView<AdminNavigationController> {
                     ? const Center(child: Text(AppStrings.emptyProducts))
                     : GetBuilder<AdminNavigationController>(
                         builder: (_) {
-                          return (controller.isSearching &&
-                                  controller.searchedProducts.isEmpty)
+                          return (controller.isSearching && controller.searchedProducts.isEmpty)
                               ? Center(
                                   child: const Text(AppStrings.emptyProducts)
                                       .paddingOnly(bottom: 130.h))
@@ -129,24 +125,28 @@ class _CheckTabBar extends GetView<AdminNavigationController> {
   }
 }
 
-class _ListViewWidget extends GetView<AdminNavigationController> {
+class _ListViewWidget extends StatelessWidget {
   const _ListViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-      itemCount: controller.isSearching
-          ? controller.searchedProducts.length
-          : controller.products.length,
-      separatorBuilder: (context, index) => Divider(
-        height: .1.h,
-        color: AppColors.greyColor,
-      ).paddingSymmetric(vertical: 10.h),
-      itemBuilder: (context, index) {
-        return controller.isSearching
-            ? _ProductItem(controller.searchedProducts[index])
-            : _ProductItem(controller.products[index]);
+    return GetBuilder<AdminNavigationController>(
+      builder: (controller) {
+        return ListView.separated(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+          itemCount: controller.isSearching
+              ? controller.searchedProducts.length
+              : controller.products.length,
+          separatorBuilder: (context, index) => Divider(
+            height: .1.h,
+            color: AppColors.greyColor,
+          ).paddingSymmetric(vertical: 10.h),
+          itemBuilder: (context, index) {
+            return controller.isSearching
+                ? _ProductItem(controller.searchedProducts[index])
+                : _ProductItem(controller.products[index]);
+          },
+        );
       },
     );
   }
@@ -160,8 +160,7 @@ class _ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(Routes.adminProductDetailsScreen,
-          arguments: productModel),
+      onTap: () => Get.toNamed(Routes.adminProductDetailsScreen, arguments: productModel),
       child: Container(
         color: Colors.transparent,
         child: Row(
@@ -206,8 +205,7 @@ class _ProductItem extends StatelessWidget {
                     children: [
                       Text(
                         '${productModel.price.toString()} ر.س',
-                        style: getBoldStyle(
-                            fontSize: 10.sp, color: AppColors.primaryColor),
+                        style: getBoldStyle(fontSize: 10.sp, color: AppColors.primaryColor),
                       ),
                       Text(
                         '${AppStrings.purchases}: ${productModel.purchases.toString()}',

@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
 import '../../../../../controllers/user/favorite_controller.dart';
 import '../../../../../controllers/user/user_navigation_controller.dart';
-import '../../../../../core/constants/app_styles.dart';
-import '../../../../../core/constants/empty_padding.dart';
-import '../../../../widgets/custom_title.dart';
-
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_images.dart';
 import '../../../../../core/constants/app_strings.dart';
+import '../../../../../core/constants/app_styles.dart';
+import '../../../../../core/constants/empty_padding.dart';
 import '../../../../../models/product_model.dart';
 import '../../../../../routes/routes.dart';
 import '../../../../widgets/app_text_field.dart';
+import '../../../../widgets/custom_title.dart';
 import '../../../../widgets/loading_widget.dart';
 
 class HomeFragment extends GetView<UserNavigationController> {
@@ -29,8 +29,7 @@ class HomeFragment extends GetView<UserNavigationController> {
           const _SearchBar(),
 
           /// Categories
-          const CustomTitle(title: AppStrings.categories)
-              .paddingSymmetric(horizontal: 16.w),
+          const CustomTitle(title: AppStrings.categories).paddingSymmetric(horizontal: 16.w),
           10.ph,
           Row(
             children: [
@@ -39,24 +38,19 @@ class HomeFragment extends GetView<UserNavigationController> {
                 image: AppImages.category1,
               ),
               18.pw,
-              const _CategoryItem(
-                  title: AppStrings.wreaths, image: AppImages.category2),
+              const _CategoryItem(title: AppStrings.wreaths, image: AppImages.category2),
               18.pw,
-              const _CategoryItem(
-                  title: AppStrings.embroideries, image: AppImages.category3),
+              const _CategoryItem(title: AppStrings.embroideries, image: AppImages.category3),
               18.pw,
-              const _CategoryItem(
-                  title: AppStrings.wooden, image: AppImages.category4),
+              const _CategoryItem(title: AppStrings.wooden, image: AppImages.category4),
               18.pw,
-              const _CategoryItem(
-                  title: AppStrings.accessories, image: AppImages.category5),
+              const _CategoryItem(title: AppStrings.accessories, image: AppImages.category5),
             ],
           ).paddingSymmetric(horizontal: 16.w),
 
           /// Products
           20.ph,
-          const CustomTitle(title: AppStrings.products)
-              .paddingSymmetric(horizontal: 16.w),
+          const CustomTitle(title: AppStrings.products).paddingSymmetric(horizontal: 16.w),
           const _StatusGridView(),
         ],
       ),
@@ -88,6 +82,35 @@ class _SearchBar extends GetView<UserNavigationController> {
         controller.update();
       },
     ).paddingSymmetric(horizontal: 15.w, vertical: 15.h);
+  }
+}
+
+class _StatusGridView extends GetView<UserNavigationController> {
+  const _StatusGridView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () {
+        return controller.isLoading.value
+            ? const LoadingWidget()
+            : controller.status == false
+                ? const Center(child: Text(AppStrings.somethingWentWrong))
+                : controller.products.isEmpty
+                    ? const Center(child: Text(AppStrings.emptyProducts))
+                    : GetBuilder<UserNavigationController>(
+                        builder: (_) {
+                          return (controller.isSearching == true &&
+                                  controller.searchedProducts.isEmpty)
+                              ? const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(AppStrings.emptyProducts),
+                                )
+                              : const _GridView();
+                        },
+                      );
+      },
+    );
   }
 }
 
@@ -124,65 +147,39 @@ class _CategoryItem extends StatelessWidget {
   }
 }
 
-class _StatusGridView extends GetView<UserNavigationController> {
-  const _StatusGridView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return controller.isLoading.value
-            ? const LoadingWidget()
-            : controller.status == false
-                ? const Center(child: Text(AppStrings.somethingWentWrong))
-                : controller.products.isEmpty
-                    ? const Center(child: Text(AppStrings.emptyProducts))
-                    : GetBuilder<UserNavigationController>(
-                        builder: (_) {
-                          return (controller.isSearching == true &&
-                                  controller.searchedProducts.isEmpty)
-                              ? const Align(
-                                  alignment: Alignment.center,
-                                  child: Text(AppStrings.emptyProducts),
-                                )
-                              : const _GridView();
-                        },
-                      );
-      },
-    );
-  }
-}
-
-class _GridView extends GetView<UserNavigationController> {
+class _GridView extends StatelessWidget {
   const _GridView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-        crossAxisSpacing: 19.w,
-        mainAxisSpacing: 19.h,
-      ),
-      itemCount: controller.isSearching
-          ? controller.searchedProducts.length
-          : controller.products.length,
-      itemBuilder: (context, index) {
-        // return const _ProductItem();
-        return controller.isSearching
-            ? _ProductItem(controller.searchedProducts[index])
-            : _ProductItem(controller.products[index]);
-      },
-    );
+    return GetBuilder<UserNavigationController>(builder: (controller) {
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.8,
+          crossAxisSpacing: 19.w,
+          mainAxisSpacing: 19.h,
+        ),
+        itemCount: controller.isSearching
+            ? controller.searchedProducts.length
+            : controller.products.length,
+        itemBuilder: (context, index) {
+          // return const _ProductItem();
+          return controller.isSearching
+              ? _ProductItem(controller.searchedProducts[index])
+              : _ProductItem(controller.products[index]);
+        },
+      );
+    });
   }
 }
 
 class _ProductItem extends StatelessWidget {
   final ProductModel productModel;
+
   const _ProductItem(this.productModel, {super.key});
 
   @override
@@ -240,8 +237,7 @@ class _ProductItem extends StatelessWidget {
                 5.ph,
                 Text(
                   '${productModel.price} ر.س',
-                  style: getBoldStyle(
-                      fontSize: 10.sp, color: AppColors.primaryColor),
+                  style: getBoldStyle(fontSize: 10.sp, color: AppColors.primaryColor),
                 ),
               ],
             ),

@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sezon_app/controllers/user/requests_controller.dart';
+
 import '../../core/constants/app_images.dart';
 import '../../core/constants/app_strings.dart';
+import '../../core/storage/global.dart';
 import '../../firebase/firestore/set_shopping.dart';
 import '../../models/product_model.dart';
+import '../../models/radio_option.dart';
 import '../../models/shopping_model.dart';
 import '../../view/widgets/snack.dart';
-
-import '../../core/storage/global.dart';
-import '../../models/radio_option.dart';
 
 class BuyNowController extends GetxController {
   String? paymentMethod;
@@ -24,8 +25,7 @@ class BuyNowController extends GetxController {
     update();
   }
 
-  bool get isReady =>
-      address != null && paymentMethod != null && productDescription != null;
+  bool get isReady => address != null && paymentMethod != null && productDescription != null;
 
   confirmation() {
     if (address == null) {
@@ -37,8 +37,7 @@ class BuyNowController extends GetxController {
       return;
     }
     if (productDescription == null) {
-      Snack()
-          .show(type: false, message: AppStrings.pleaseAddProductDescription);
+      Snack().show(type: false, message: AppStrings.pleaseAddProductDescription);
       return;
     }
     validate();
@@ -61,6 +60,7 @@ class BuyNowController extends GetxController {
     if (result) {
       Get.back();
       Snack().show(type: true, message: AppStrings.successSendRequest);
+      Get.find<RequestsController>().getShopping();
     } else {
       Snack().show(type: false, message: AppStrings.somethingWentWrong);
     }
