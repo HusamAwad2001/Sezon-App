@@ -19,6 +19,8 @@ class AppStrings {
   static const String send = 'أرسل';
   static const String add = 'اضافة';
   static const String next = 'التالي';
+  static const String save = 'حفظ';
+  static const String close = 'رجوع';
   static const String home = 'الرئيسية';
   static const String sales = 'المبيعات';
   static const String notifications = 'الاشعارات';
@@ -37,7 +39,13 @@ class AppStrings {
   static const String addNewProduct = 'اضافة منتج جديد';
   static const String productTitle = 'اسم المنتج';
   static const String hintProductTitle = 'خزف ملون صنع يدوي';
+  static const String productColor = 'لون المنتج';
+  static const String hintProductColor = 'الأسود';
+  static const String size = 'الحجم';
+  static const String hintSize = 'xxl';
   static const String productDescription = 'وصف المنتج';
+  static const String quantity = 'الكمية';
+  static const String quantityCount = '5 قطع';
   static const String hintProductDescription = 'مثال: منتج تم صناعته بافضل الخامات...';
   static const String price = 'السعر';
   static const String hintPrice = '130ر.س';
@@ -46,8 +54,11 @@ class AppStrings {
   static const String selectProductCategory = 'اختر فئة المنتج';
   static const String hintSelectProductCategory = 'اكسسوارات';
   static const String somethingWentWrong = 'حدث خطأ ما يرجى المحاولة مرة أخرى';
+  static const String successSendRequest = 'تم ارسال طلبك بنجاح';
   static const String successMessage = 'تمت العملية بنجاح';
-  static const String emptyProducts = 'لا يوجد منتجات';
+  static const String emptyProducts = 'لا توجد منتجات';
+  static const String emptyShoppingPending = 'لا توجد طلبات قيد التنفيد';
+  static const String emptyShoppingAccepted = 'لا توجد طلبات مستلمة';
   static const String relatedEmptyProducts = 'لا يوجد منتجات ذات صلة';
   static const String relatedProducts = 'منتجات ذات صلة';
   static const String emptyFavorites = 'لا يوجد منتجات مفضلة';
@@ -59,4 +70,20 @@ class AppStrings {
   static const String buyNow = 'شراء الان';
   static const String productIsExist = 'المنتج موجود بالفعل';
   static const String added = 'تم إضافة المنتج';
+  static const String completeYourPurchase = 'إتمام عملية الشراء';
+  static const String confirmation = 'تأكيد الطلب';
+  static const String addNewAddress = 'إضافة عنوان جديد';
+  static const String addAddress = 'إضافة عنوان';
+  static const String paymentMethod = 'اختر طريقة دفع';
+  static const String addProductSpecifications = 'اضافة مواصفات المنتج';
+  static const String country = 'الدولة';
+  static const String hintCountry = 'الامارات';
+  static const String region = 'المنطقة';
+  static const String hintRegion = 'المنطقة، محافظة، ولاية';
+  static const String city = 'المدينة';
+  static const String hintCity = 'الشيخ زايد';
+  static const String street = 'الشارع';
+  static const String hintStreet = 'الشارع، المنزل، الوحدة السكنية';
+  static const String zipCode = 'الرمز البريدي';
+  static const String hintZipCode = '872';
 }

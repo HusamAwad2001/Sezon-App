@@ -25,6 +25,7 @@ class UserNavigationScreen extends GetView<UserNavigationController> {
                 Image.asset(AppImages.avatar, width: 30.w, height: 30.h).paddingOnly(right: 24.w),
             suffix: Image.asset(AppImages.notification, width: 24.w, height: 24.h)
                 .paddingOnly(left: 24.w),
+            isShadow: controller.selectedIndex == 2 ? false : true,
           ),
           body: IndexedStack(index: controller.selectedIndex, children: controller.fragments),
           bottomNavigationBar: BottomNavigationBar(

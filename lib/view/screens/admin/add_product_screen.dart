@@ -11,8 +11,8 @@ import 'package:sezon_app/core/constants/shared_functions.dart';
 import 'package:sezon_app/view/widgets/app_button.dart';
 import 'package:sezon_app/view/widgets/custom_app_bar.dart';
 import 'package:sezon_app/view/widgets/custom_radio.dart';
+import 'package:sezon_app/view/widgets/custom_title.dart';
 import 'package:sezon_app/view/widgets/loading_widget.dart';
-import 'package:sezon_app/view/widgets/title_bottom_sheet.dart';
 
 import '../../../core/constants/app_styles.dart';
 import '../../widgets/app_text_field.dart';

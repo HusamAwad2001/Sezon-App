@@ -18,6 +18,12 @@ class AppImages {
   static const String favorite = '$_path/favorite.png';
   static const String cart = '$_path/cart.png';
   static const String avatar = '$_path/avatar.png';
+  static const String location = '$_path/location.png';
+  static const String pay = '$_path/pay.png';
+  static const String payDescription = '$_path/payDescription.png';
+  static const String visa = '$_path/visa.png';
+  static const String master = '$_path/master.png';
+  static const String bank = '$_path/bank.png';
 
   /// SVG
   static const String _svgPath = 'assets/svg';

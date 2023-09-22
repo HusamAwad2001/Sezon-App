@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../view/widgets/snack.dart';
-import 'fisestore_helper.dart';
+import '../fisestore_helper.dart';
 
 class CheckUserNameOrPhone {
   static Future<bool> call(String userName, String phone) async {

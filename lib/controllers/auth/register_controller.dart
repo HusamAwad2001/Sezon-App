@@ -50,7 +50,6 @@ class RegisterController extends GetxController {
     checkInternet(() async {
       isLoading.value = true;
       UserModel userModel = UserModel(
-        id: '',
         userName: userNameController.text,
         phone: phoneController.text,
         password: generateMd5(passwordController.text),

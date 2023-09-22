@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sezon_app/firebase/firestore/fisestore_helper.dart';
+import 'package:sezon_app/firebase/fisestore_helper.dart';
 
 import '../../core/storage/storage.dart';
 import '../../models/user_model.dart';

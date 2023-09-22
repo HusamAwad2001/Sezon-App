@@ -1,14 +1,14 @@
 enum UserRole { admin, user }
 
 class UserModel {
-  String id;
+  String? id;
   final String userName;
   final String phone;
   final String password;
   final UserRole role;
 
   UserModel({
-    required this.id,
+    this.id,
     required this.userName,
     required this.phone,
     required this.password,

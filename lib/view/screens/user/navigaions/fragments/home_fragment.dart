@@ -7,7 +7,7 @@ import 'package:sezon_app/controllers/user/favorite_controller.dart';
 import 'package:sezon_app/controllers/user/user_navigation_controller.dart';
 import 'package:sezon_app/core/constants/app_styles.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/view/widgets/title_bottom_sheet.dart';
+import 'package:sezon_app/view/widgets/custom_title.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_images.dart';
@@ -22,51 +22,53 @@ class HomeFragment extends GetView<UserNavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        /// Search Bar
-        AppTextField(
-          controller: controller.searchController,
-          hintText: AppStrings.hintSearch,
-          hintColor: AppColors.greyColor2,
-          borderRadius: 10.r,
-          backgroundColor: Colors.black.withOpacity(0.04),
-          enableBorderColor: Colors.transparent,
-          focusBorderColor: Colors.transparent,
-          prefix: SvgPicture.asset(AppImages.search, width: 20.w),
-          onChanged: (query) {
-            if (query.isNotEmpty || query != '') {
-              controller.isSearching = true;
-              controller.search(query);
-            } else {
-              controller.isSearching = false;
-            }
-            controller.update();
-          },
-        ).paddingSymmetric(horizontal: 15.w, vertical: 15.h),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          /// Search Bar
+          AppTextField(
+            controller: controller.searchController,
+            hintText: AppStrings.hintSearch,
+            hintColor: AppColors.greyColor2,
+            borderRadius: 10.r,
+            backgroundColor: Colors.black.withOpacity(0.04),
+            enableBorderColor: Colors.transparent,
+            focusBorderColor: Colors.transparent,
+            prefix: SvgPicture.asset(AppImages.search, width: 20.w),
+            onChanged: (query) {
+              if (query.isNotEmpty || query != '') {
+                controller.isSearching = true;
+                controller.search(query);
+              } else {
+                controller.isSearching = false;
+              }
+              controller.update();
+            },
+          ).paddingSymmetric(horizontal: 15.w, vertical: 15.h),
 
-        /// Categories
-        const CustomTitle(title: AppStrings.categories).paddingSymmetric(horizontal: 16.w),
-        10.ph,
-        Row(
-          children: [
-            const _CategoryItem(title: AppStrings.category1, image: AppImages.category1),
-            18.pw,
-            const _CategoryItem(title: AppStrings.category2, image: AppImages.category2),
-            18.pw,
-            const _CategoryItem(title: AppStrings.category3, image: AppImages.category3),
-            18.pw,
-            const _CategoryItem(title: AppStrings.category4, image: AppImages.category4),
-            18.pw,
-            const _CategoryItem(title: AppStrings.category5, image: AppImages.category5),
-          ],
-        ).paddingSymmetric(horizontal: 16.w),
+          /// Categories
+          const CustomTitle(title: AppStrings.categories).paddingSymmetric(horizontal: 16.w),
+          10.ph,
+          Row(
+            children: [
+              const _CategoryItem(title: AppStrings.category1, image: AppImages.category1),
+              18.pw,
+              const _CategoryItem(title: AppStrings.category2, image: AppImages.category2),
+              18.pw,
+              const _CategoryItem(title: AppStrings.category3, image: AppImages.category3),
+              18.pw,
+              const _CategoryItem(title: AppStrings.category4, image: AppImages.category4),
+              18.pw,
+              const _CategoryItem(title: AppStrings.category5, image: AppImages.category5),
+            ],
+          ).paddingSymmetric(horizontal: 16.w),
 
-        /// Products
-        20.ph,
-        const CustomTitle(title: AppStrings.products).paddingSymmetric(horizontal: 16.w),
-        const _GridView(),
-      ],
+          /// Products
+          20.ph,
+          const CustomTitle(title: AppStrings.products).paddingSymmetric(horizontal: 16.w),
+          const _GridView(),
+        ],
+      ),
     );
   }
 }
@@ -109,45 +111,45 @@ class _GridView extends GetView<UserNavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Obx(
-        () {
-          return controller.isLoading.value
-              ? const LoadingWidget()
-              : controller.status == false
-                  ? const Center(child: Text(AppStrings.somethingWentWrong))
-                  : controller.products.isEmpty
-                      ? const Center(child: Text(AppStrings.emptyProducts))
-                      : GetBuilder<UserNavigationController>(
-                          builder: (_) {
-                            return (controller.isSearching == true &&
-                                    controller.searchedProducts.isEmpty)
-                                ? const Align(
-                                    alignment: Alignment.center,
-                                    child: Text(AppStrings.emptyProducts),
-                                  )
-                                : GridView.builder(
-                                    padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 0.8,
-                                      crossAxisSpacing: 19.w,
-                                      mainAxisSpacing: 19.h,
-                                    ),
-                                    itemCount: controller.isSearching
-                                        ? controller.searchedProducts.length
-                                        : controller.products.length,
-                                    itemBuilder: (context, index) {
-                                      // return const _ProductItem();
-                                      return controller.isSearching
-                                          ? _ProductItem(controller.searchedProducts[index])
-                                          : _ProductItem(controller.products[index]);
-                                    },
-                                  );
-                          },
-                        );
-        },
-      ),
+    return Obx(
+      () {
+        return controller.isLoading.value
+            ? const LoadingWidget()
+            : controller.status == false
+                ? const Center(child: Text(AppStrings.somethingWentWrong))
+                : controller.products.isEmpty
+                    ? const Center(child: Text(AppStrings.emptyProducts))
+                    : GetBuilder<UserNavigationController>(
+                        builder: (_) {
+                          return (controller.isSearching == true &&
+                                  controller.searchedProducts.isEmpty)
+                              ? const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(AppStrings.emptyProducts),
+                                )
+                              : GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 0.8,
+                                    crossAxisSpacing: 19.w,
+                                    mainAxisSpacing: 19.h,
+                                  ),
+                                  itemCount: controller.isSearching
+                                      ? controller.searchedProducts.length
+                                      : controller.products.length,
+                                  itemBuilder: (context, index) {
+                                    // return const _ProductItem();
+                                    return controller.isSearching
+                                        ? _ProductItem(controller.searchedProducts[index])
+                                        : _ProductItem(controller.products[index]);
+                                  },
+                                );
+                        },
+                      );
+      },
     );
   }
 }

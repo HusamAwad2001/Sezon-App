@@ -6,9 +6,10 @@ import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/core/constants/app_styles.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
 import 'package:sezon_app/models/product_model.dart';
+import 'package:sezon_app/routes/routes.dart';
 import 'package:sezon_app/view/widgets/app_button.dart';
 import 'package:sezon_app/view/widgets/custom_app_bar.dart';
-import 'package:sezon_app/view/widgets/title_bottom_sheet.dart';
+import 'package:sezon_app/view/widgets/custom_title.dart';
 
 import '../../../controllers/user/favorite_controller.dart';
 import '../../../controllers/user/user_navigation_controller.dart';
@@ -27,18 +28,20 @@ class UserProductDetailsScreen extends StatelessWidget {
         .toList();
     return Scaffold(
       appBar: customAppBar(title: AppStrings.productDetails, isBack: true),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CachedNetworkImage(
-            imageUrl: productModel.imageUrl!,
-            placeholder: (context, url) => const LoadingWidget(),
-            errorWidget: (context, url, error) => Center(child: Icon(Icons.error, size: 30.w)),
-            fit: BoxFit.fitWidth,
-          ),
-          20.ph,
-          Expanded(
-            child: Column(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CachedNetworkImage(
+              imageUrl: productModel.imageUrl!,
+              placeholder: (context, url) => const LoadingWidget(),
+              errorWidget: (context, url, error) => Center(child: Icon(Icons.error, size: 30.w)),
+              fit: BoxFit.cover,
+              width: Get.width,
+              height: 235.h,
+            ),
+            20.ph,
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -46,14 +49,14 @@ class UserProductDetailsScreen extends StatelessWidget {
                 Text(
                   productModel.name,
                   style: getBoldStyle(fontSize: 15.sp),
-                ),
+                ).paddingSymmetric(horizontal: 16.w),
                 10.ph,
 
                 /// Price
                 Text(
                   '${productModel.price.toString()} ر.س',
                   style: getBoldStyle(fontSize: 15.sp, color: AppColors.primaryColor),
-                ),
+                ).paddingSymmetric(horizontal: 16.w),
                 10.ph,
 
                 /// Description
@@ -62,36 +65,41 @@ class UserProductDetailsScreen extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: getRegularStyle(fontSize: 11.sp),
-                ),
+                ).paddingSymmetric(horizontal: 16.w),
                 30.ph,
 
                 /// Related Products
-                const CustomTitle(title: AppStrings.relatedProducts),
+                const CustomTitle(title: AppStrings.relatedProducts)
+                    .paddingSymmetric(horizontal: 16.w),
                 19.ph,
+
+                /// Related Products List
                 SizedBox(
-                  height: 143.h,
+                  height: 160.h,
                   child: products.isEmpty
                       ? Card(
                           color: Colors.grey.withOpacity(.2),
                           elevation: 0,
                           child: const Center(child: Text(AppStrings.relatedEmptyProducts)),
                         )
-                      : ListView.builder(
+                      : ListView.separated(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
                           scrollDirection: Axis.horizontal,
                           itemCount: products.length,
+                          separatorBuilder: (context, index) => 10.pw,
                           itemBuilder: (context, index) {
                             return _ProductItem(products[index]);
                           },
                         ),
                 ),
 
-                /// Add to Cart
-                const Spacer(),
-                _BottomWidget(productModel: productModel),
+                /// Add to Favorite and Buy Now
+                16.ph,
+                _BottomButtonsWidget(productModel: productModel).paddingSymmetric(horizontal: 16.w),
               ],
-            ).paddingSymmetric(horizontal: 16.w),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -109,32 +117,23 @@ class _ProductItem extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Get.to(
-              () => const UserProductDetailsScreen(),
+            Navigator.of(context).pushReplacementNamed(
+              Routes.userProductDetailsScreen,
               arguments: {
                 'productModel': productModel,
                 'products': Get.find<UserNavigationController>().products,
               },
             );
-            // Get.toNamed(
-            //   Routes.userProductDetailsScreen,
-            //   arguments: {
-            //     'productModel': productModel,
-            //     'products': Get.find<UserNavigationController>().products,
-            //   },
-            // );
           },
           child: Container(
             padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(5.r),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 10,
-                  color: Colors.black.withOpacity(0.20),
-                ),
-              ],
+              border: Border.all(
+                color: Colors.black.withOpacity(.13),
+                width: .5,
+              ),
             ),
             alignment: Alignment.center,
             child: Column(
@@ -144,7 +143,8 @@ class _ProductItem extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5.r),
                   child: CachedNetworkImage(
-                    height: 80.h,
+                    height: 83.h,
+                    width: 99.w,
                     imageUrl: productModel.imageUrl!,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => const LoadingWidget(),
@@ -185,13 +185,17 @@ class _ProductItem extends StatelessWidget {
                 color: Colors.white.withOpacity(0.2),
               ),
               alignment: Alignment.center,
-              child: Icon(
-                Icons.favorite,
-                size: 10.w,
-                color: favoriteController.favoritesList
-                        .any((element) => element['id'] == productModel.id)
-                    ? Colors.red
-                    : const Color(0xFFDEDFDF),
+              child: GetBuilder<FavoriteController>(
+                builder: (_) {
+                  return Icon(
+                    Icons.favorite,
+                    size: 10.w,
+                    color: favoriteController.favoritesList
+                            .any((element) => element['id'] == productModel.id)
+                        ? Colors.red
+                        : const Color(0xFFDEDFDF),
+                  );
+                },
               ),
             ),
           ),
@@ -201,10 +205,10 @@ class _ProductItem extends StatelessWidget {
   }
 }
 
-class _BottomWidget extends StatelessWidget {
+class _BottomButtonsWidget extends StatelessWidget {
   final ProductModel productModel;
 
-  const _BottomWidget({super.key, required this.productModel});
+  const _BottomButtonsWidget({super.key, required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +252,7 @@ class _BottomWidget extends StatelessWidget {
               child: AppButton(
                 label: AppStrings.buyNow,
                 borderRadius: 0,
-                onPressed: () {},
+                onPressed: () => Get.toNamed(Routes.buyNowScreen, arguments: productModel),
               ),
             ),
           ),

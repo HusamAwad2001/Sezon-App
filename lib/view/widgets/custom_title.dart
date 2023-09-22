@@ -17,7 +17,7 @@ class CustomTitle extends StatelessWidget {
       children: [
         Container(
           width: 5.w,
-          height: 30.h,
+          height: 15.h,
           decoration: BoxDecoration(
             color: AppColors.primaryColor,
             borderRadius: BorderRadius.circular(10.r),
@@ -27,7 +27,7 @@ class CustomTitle extends StatelessWidget {
         Text(
           title,
           style: getMediumStyle(
-            fontSize: 15.sp,
+            fontSize: 14.sp,
           ),
         ),
       ],

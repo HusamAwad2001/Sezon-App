@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:sezon_app/firebase/firestore/fisestore_helper.dart';
+import 'package:sezon_app/firebase/fisestore_helper.dart';
 
 import '../../models/product_model.dart';
 import '../../view/widgets/snack.dart';

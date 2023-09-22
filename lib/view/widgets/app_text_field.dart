@@ -9,8 +9,9 @@ class AppTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.label,
-    this.labelSize,
+    this.fontSize,
     this.hintSize,
+    this.labelStyle,
     this.backgroundColor,
     this.borderRadius = 5,
     this.enableBorderColor,
@@ -36,8 +37,9 @@ class AppTextField extends StatelessWidget {
 
   final String hintText;
   final String? label;
-  final double? labelSize;
+  final double? fontSize;
   final double? hintSize;
+  final TextStyle? labelStyle;
   final Color? backgroundColor;
   final double borderRadius;
   final Color? enableBorderColor;
@@ -74,7 +76,7 @@ class AppTextField extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       onChanged: onChanged,
-      style: TextStyle(color: textColor ?? Colors.black, fontSize: labelSize ?? 14.sp),
+      style: TextStyle(color: textColor ?? Colors.black, fontSize: fontSize ?? 14.sp),
       cursorColor: hintColor ?? AppColors.primaryColor,
       decoration: InputDecoration(
         enabled: isEnabled,
@@ -89,10 +91,11 @@ class AppTextField extends StatelessWidget {
         label: label != null
             ? Text(
                 label!,
-                style: getRegularStyle(
-                  color: AppColors.primaryColor,
-                  fontSize: 12.sp,
-                ),
+                style: labelStyle ??
+                    getRegularStyle(
+                      color: AppColors.primaryColor,
+                      fontSize: 12.sp,
+                    ),
               ).paddingSymmetric(horizontal: 5.w)
             : null,
         counter: const SizedBox.shrink(),

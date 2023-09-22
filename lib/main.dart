@@ -15,10 +15,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Storage.getData();
   // Storage.instance.remove('user');
+  // print(Global.user['id']);
   runApp(const MyApp());
 }
 

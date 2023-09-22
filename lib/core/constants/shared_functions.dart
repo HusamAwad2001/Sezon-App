@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sezon_app/core/constants/app_colors.dart';
 import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/view/widgets/title_bottom_sheet.dart';
+import 'package:sezon_app/view/widgets/custom_title.dart';
 
 import '../../view/widgets/snack.dart';
 
@@ -56,7 +56,10 @@ void openBottomSheet(String title, Widget child) {
     elevation: 0,
     backgroundColor: Colors.white,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(30.r),
+      borderRadius: BorderRadius.only(
+        topRight: Radius.circular(30.r),
+        topLeft: Radius.circular(30.r),
+      ),
     ),
   );
 }

@@ -59,7 +59,9 @@ class AdminNavigationController extends GetxController {
   List<ProductModel> searchedProducts = [];
   bool isSearching = false;
   search(String query) {
-    searchedProducts = products.where((element) => element.name.startsWith(query)).toList();
+    searchedProducts = products
+        .where((element) => element.name.toLowerCase().startsWith(query.toLowerCase()))
+        .toList();
     update();
   }
 }

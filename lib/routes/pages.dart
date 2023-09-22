@@ -4,10 +4,12 @@ import 'package:sezon_app/bindings/admin/admin_navigation_binding.dart';
 import 'package:sezon_app/bindings/auth/login_binding.dart';
 import 'package:sezon_app/bindings/auth/otp_binding.dart';
 import 'package:sezon_app/bindings/auth/register_binding.dart';
+import 'package:sezon_app/bindings/user/buy_now_bunding.dart';
 import 'package:sezon_app/view/screens/admin/add_product_screen.dart';
 import 'package:sezon_app/view/screens/admin/admin_product_details_screen.dart';
 import 'package:sezon_app/view/screens/admin/navigaions/admin_navigation_screen.dart';
 import 'package:sezon_app/view/screens/auth/otp_screen.dart';
+import 'package:sezon_app/view/screens/user/buy_now_screen.dart';
 
 import '../routes/routes.dart';
 import '../view/screens/auth/login_screen.dart';
@@ -50,6 +52,11 @@ class Pages {
       GetPage(
         name: Routes.userProductDetailsScreen,
         page: () => const UserProductDetailsScreen(),
+      ),
+      GetPage(
+        name: Routes.buyNowScreen,
+        page: () => const BuyNowScreen(),
+        binding: BuyNowBinding(),
       ),
 
       /// Admin Screens

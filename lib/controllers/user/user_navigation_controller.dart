@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sezon_app/core/constants/app_images.dart';
 import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/view/screens/user/navigaions/fragments/cart_fragment.dart';
 import 'package:sezon_app/view/screens/user/navigaions/fragments/category_fragment.dart';
 import 'package:sezon_app/view/screens/user/navigaions/fragments/favorite_fragment.dart';
 import 'package:sezon_app/view/screens/user/navigaions/fragments/home_fragment.dart';
+import 'package:sezon_app/view/screens/user/navigaions/fragments/requests_fragment.dart';
 
 import '../../firebase/firestore/get_all_products.dart';
 import '../../models/product_model.dart';
@@ -20,7 +20,7 @@ class UserNavigationController extends GetxController {
   List<Widget> fragments = [
     const HomeFragment(),
     const CategoryFragment(),
-    const CartFragment(),
+    const RequestsFragment(),
     const FavoriteFragment(),
   ];
 
@@ -95,7 +95,9 @@ class UserNavigationController extends GetxController {
   List<ProductModel> searchedProducts = [];
   bool isSearching = false;
   search(String query) {
-    searchedProducts = products.where((element) => element.name.startsWith(query)).toList();
+    searchedProducts = products
+        .where((element) => element.name.toLowerCase().startsWith(query.toLowerCase()))
+        .toList();
     update();
   }
 }
