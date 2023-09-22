@@ -12,7 +12,6 @@ class SplashScreen extends StatelessWidget {
 
   _start() async {
     await Future.delayed(3.seconds, () {
-      print(Global.user['role'] == 'user');
       !(Storage.instance.hasData('user'))
           ? Get.offNamed(Routes.loginScreen)
           : Global.user['role'] == 'admin'

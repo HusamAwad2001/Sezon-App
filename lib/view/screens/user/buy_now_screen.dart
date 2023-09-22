@@ -135,7 +135,7 @@ class _ItemWidget extends StatelessWidget {
   }
 }
 
-/// Bottom Sheets Widgets
+/// Address Bottom Sheet Widget
 class _AddAddressSheet extends StatelessWidget {
   const _AddAddressSheet({super.key});
 
@@ -213,6 +213,7 @@ class _AddAddressSheet extends StatelessWidget {
   }
 }
 
+/// Payment Method Bottom Sheet Widget
 class _PaymentMethodSheet extends StatelessWidget {
   const _PaymentMethodSheet({super.key});
 
@@ -275,6 +276,7 @@ class _PaymentMethodSheet extends StatelessWidget {
   }
 }
 
+/// Product Specifications Bottom Sheet Widget
 class _AddProductSpecificationsSheet extends StatelessWidget {
   const _AddProductSpecificationsSheet({super.key});
 

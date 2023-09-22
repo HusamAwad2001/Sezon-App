@@ -32,7 +32,7 @@ class FavoriteFragment extends StatelessWidget {
                 ).paddingSymmetric(vertical: 7.h),
                 itemBuilder: (context, index) {
                   final item = ProductModel.fromJson(controller.favoritesList[index]);
-                  return _ProductItem(productModel: item, index: index);
+                  return _FavoriteItem(productModel: item, index: index);
                 },
               );
       },
@@ -40,11 +40,11 @@ class FavoriteFragment extends StatelessWidget {
   }
 }
 
-class _ProductItem extends StatelessWidget {
+class _FavoriteItem extends StatelessWidget {
   final int index;
   final ProductModel productModel;
 
-  const _ProductItem({super.key, required this.productModel, required this.index});
+  const _FavoriteItem({super.key, required this.productModel, required this.index});
 
   @override
   Widget build(BuildContext context) {

@@ -24,52 +24,10 @@ class CategoryFragment extends StatelessWidget {
             .where((element) =>
                 element.category == controller.tabsSections[controller.sectionIndex]['name']!)
             .toList();
+
         return Row(
           children: [
-            Container(
-              width: Get.width * 0.25 + 5.w,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 4),
-                    color: Colors.black.withOpacity(.05),
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  ...controller.tabsSections.map(
-                    (e) {
-                      return GestureDetector(
-                        onTap: () {
-                          controller.sectionIndex = controller.tabsSections.indexOf(e);
-                          controller.update();
-                          // controller.tabsSections[controller.sectionIndex]['name']!;
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            3.pw,
-                            _CategoryItem(title: e['name']!, image: e['image']!),
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeIn,
-                              width: 3.w,
-                              height: 100.h,
-                              color: controller.tabsSections.indexOf(e) == controller.sectionIndex
-                                  ? AppColors.primaryColor
-                                  : Colors.transparent,
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ],
-              ),
-            ),
+            const _CategoriesRightWidget(),
 
             /// Expanded
             Expanded(
@@ -96,6 +54,57 @@ class CategoryFragment extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class _CategoriesRightWidget extends GetView<UserNavigationController> {
+  const _CategoriesRightWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: Get.width * 0.25 + 5.w,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 4),
+            color: Colors.black.withOpacity(.05),
+            blurRadius: 8,
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          ...controller.tabsSections.map(
+            (e) {
+              return GestureDetector(
+                onTap: () {
+                  controller.sectionIndex = controller.tabsSections.indexOf(e);
+                  controller.update();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    3.pw,
+                    _CategoryItem(title: e['name']!, image: e['image']!),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                      width: 3.w,
+                      height: 100.h,
+                      color: controller.tabsSections.indexOf(e) == controller.sectionIndex
+                          ? AppColors.primaryColor
+                          : Colors.transparent,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ).toList(),
+        ],
+      ),
     );
   }
 }

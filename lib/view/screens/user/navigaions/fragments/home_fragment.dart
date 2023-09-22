@@ -26,50 +26,62 @@ class HomeFragment extends GetView<UserNavigationController> {
       child: Column(
         children: [
           /// Search Bar
-          AppTextField(
-            controller: controller.searchController,
-            hintText: AppStrings.hintSearch,
-            hintColor: AppColors.greyColor2,
-            borderRadius: 10.r,
-            backgroundColor: Colors.black.withOpacity(0.04),
-            enableBorderColor: Colors.transparent,
-            focusBorderColor: Colors.transparent,
-            prefix: SvgPicture.asset(AppImages.search, width: 20.w),
-            onChanged: (query) {
-              if (query.isNotEmpty || query != '') {
-                controller.isSearching = true;
-                controller.search(query);
-              } else {
-                controller.isSearching = false;
-              }
-              controller.update();
-            },
-          ).paddingSymmetric(horizontal: 15.w, vertical: 15.h),
+          const _SearchBar(),
 
           /// Categories
           const CustomTitle(title: AppStrings.categories).paddingSymmetric(horizontal: 16.w),
           10.ph,
           Row(
             children: [
-              const _CategoryItem(title: AppStrings.category1, image: AppImages.category1),
+              const _CategoryItem(
+                title: AppStrings.porcelain,
+                image: AppImages.category1,
+              ),
               18.pw,
-              const _CategoryItem(title: AppStrings.category2, image: AppImages.category2),
+              const _CategoryItem(title: AppStrings.wreaths, image: AppImages.category2),
               18.pw,
-              const _CategoryItem(title: AppStrings.category3, image: AppImages.category3),
+              const _CategoryItem(title: AppStrings.embroideries, image: AppImages.category3),
               18.pw,
-              const _CategoryItem(title: AppStrings.category4, image: AppImages.category4),
+              const _CategoryItem(title: AppStrings.wooden, image: AppImages.category4),
               18.pw,
-              const _CategoryItem(title: AppStrings.category5, image: AppImages.category5),
+              const _CategoryItem(title: AppStrings.accessories, image: AppImages.category5),
             ],
           ).paddingSymmetric(horizontal: 16.w),
 
           /// Products
           20.ph,
           const CustomTitle(title: AppStrings.products).paddingSymmetric(horizontal: 16.w),
-          const _GridView(),
+          const _StatusGridView(),
         ],
       ),
     );
+  }
+}
+
+class _SearchBar extends GetView<UserNavigationController> {
+  const _SearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppTextField(
+      controller: controller.searchController,
+      hintText: AppStrings.hintSearch,
+      hintColor: AppColors.greyColor2,
+      borderRadius: 10.r,
+      backgroundColor: Colors.black.withOpacity(0.04),
+      enableBorderColor: Colors.transparent,
+      focusBorderColor: Colors.transparent,
+      prefix: SvgPicture.asset(AppImages.search, width: 20.w),
+      onChanged: (query) {
+        if (query.isNotEmpty || query != '') {
+          controller.isSearching = true;
+          controller.search(query);
+        } else {
+          controller.isSearching = false;
+        }
+        controller.update();
+      },
+    ).paddingSymmetric(horizontal: 15.w, vertical: 15.h);
   }
 }
 
@@ -106,8 +118,8 @@ class _CategoryItem extends StatelessWidget {
   }
 }
 
-class _GridView extends GetView<UserNavigationController> {
-  const _GridView({super.key});
+class _StatusGridView extends GetView<UserNavigationController> {
+  const _StatusGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -127,28 +139,36 @@ class _GridView extends GetView<UserNavigationController> {
                                   alignment: Alignment.center,
                                   child: Text(AppStrings.emptyProducts),
                                 )
-                              : GridView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 0.8,
-                                    crossAxisSpacing: 19.w,
-                                    mainAxisSpacing: 19.h,
-                                  ),
-                                  itemCount: controller.isSearching
-                                      ? controller.searchedProducts.length
-                                      : controller.products.length,
-                                  itemBuilder: (context, index) {
-                                    // return const _ProductItem();
-                                    return controller.isSearching
-                                        ? _ProductItem(controller.searchedProducts[index])
-                                        : _ProductItem(controller.products[index]);
-                                  },
-                                );
+                              : const _GridView();
                         },
                       );
+      },
+    );
+  }
+}
+
+class _GridView extends GetView<UserNavigationController> {
+  const _GridView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.8,
+        crossAxisSpacing: 19.w,
+        mainAxisSpacing: 19.h,
+      ),
+      itemCount:
+          controller.isSearching ? controller.searchedProducts.length : controller.products.length,
+      itemBuilder: (context, index) {
+        // return const _ProductItem();
+        return controller.isSearching
+            ? _ProductItem(controller.searchedProducts[index])
+            : _ProductItem(controller.products[index]);
       },
     );
   }

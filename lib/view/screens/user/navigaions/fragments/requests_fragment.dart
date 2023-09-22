@@ -24,21 +24,7 @@ class RequestsFragment extends StatelessWidget {
           length: controller.tabsSections.length,
           child: Column(
             children: [
-              TabBar(
-                tabs: controller.tabsSections
-                    .map((e) => Tab(
-                          child: Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
-                        ))
-                    .toList(),
-                indicatorSize: TabBarIndicatorSize.tab,
-                isScrollable: false,
-                indicatorColor: AppColors.primaryColor,
-                onTap: (value) {
-                  controller.selectedIndex = value;
-                  controller.getShopping();
-                  controller.update();
-                },
-              ),
+              const _TabBar(),
               Expanded(
                 child: TabBarView(
                   children: controller.tabsSections.map((e) => const _ListViewWidget()).toList(),
@@ -52,12 +38,34 @@ class RequestsFragment extends StatelessWidget {
   }
 }
 
+class _TabBar extends GetView<RequestsController> {
+  const _TabBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      tabs: controller.tabsSections
+          .map((e) => Tab(
+                child: Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
+              ))
+          .toList(),
+      indicatorSize: TabBarIndicatorSize.tab,
+      isScrollable: false,
+      indicatorColor: AppColors.primaryColor,
+      onTap: (value) {
+        controller.selectedIndex = value;
+        controller.getShopping();
+        controller.update();
+      },
+    );
+  }
+}
+
 class _ListViewWidget extends GetView<RequestsController> {
   const _ListViewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // return const Center(child: Text('RequestsFragment'));
     return Obx(
       () {
         return controller.isLoading.value

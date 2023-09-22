@@ -26,6 +26,7 @@ class UserProductDetailsScreen extends StatelessWidget {
     List<ProductModel> products = Get.arguments['products']
         .where((element) => element.category != productModel.category)
         .toList();
+
     return Scaffold(
       appBar: customAppBar(title: AppStrings.productDetails, isBack: true),
       body: SingleChildScrollView(

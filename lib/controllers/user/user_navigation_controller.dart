@@ -33,47 +33,12 @@ class UserNavigationController extends GetxController {
 
   int sectionIndex = 0;
   List<Map<String, dynamic>> tabsSections = [
-    {
-      'index': 1,
-      'name': 'الخزف',
-      'image': AppImages.category1,
-    },
-    {
-      'index': 2,
-      'name': 'الأكاليل',
-      'image': AppImages.category2,
-    },
-    {
-      'index': 3,
-      'name': 'المطرزات',
-      'image': AppImages.category3,
-    },
-    {
-      'index': 4,
-      'name': 'خشبيات',
-      'image': AppImages.category4,
-    },
-    {
-      'index': 5,
-      'name': 'اكسسوارات',
-      'image': AppImages.category5,
-    },
+    {'index': 1, 'name': AppStrings.porcelain, 'image': AppImages.category1},
+    {'index': 2, 'name': AppStrings.wreaths, 'image': AppImages.category2},
+    {'index': 3, 'name': AppStrings.embroideries, 'image': AppImages.category3},
+    {'index': 4, 'name': AppStrings.wooden, 'image': AppImages.category4},
+    {'index': 5, 'name': AppStrings.accessories, 'image': AppImages.category5},
   ];
-  // List<String> tabsSections = [
-  //   'الخزف',
-  //   'الأكاليل',
-  //   'المطرزات',
-  //   'خشبيات',
-  //   'اكسسوارات',
-  // ];
-  // List<String> tabsSectionsImage = [
-  //   AppImages.category1,
-  //   AppImages.category2,
-  //   AppImages.category3,
-  //   AppImages.category4,
-  //   AppImages.category5,
-  // ];
-
   @override
   void onInit() {
     super.onInit();
@@ -94,6 +59,7 @@ class UserNavigationController extends GetxController {
   TextEditingController searchController = TextEditingController();
   List<ProductModel> searchedProducts = [];
   bool isSearching = false;
+
   search(String query) {
     searchedProducts = products
         .where((element) => element.name.toLowerCase().startsWith(query.toLowerCase()))

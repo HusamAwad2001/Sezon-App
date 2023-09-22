@@ -14,9 +14,9 @@ class BuyNowController extends GetxController {
   String? paymentMethod;
 
   List<RadioOption> options = [
-    RadioOption('بطاقة الفيزا', 1, image: AppImages.visa),
-    RadioOption('بطاقة ماستركارد', 2, image: AppImages.master),
-    RadioOption('تحويل بنكي', 3, image: AppImages.bank),
+    RadioOption(AppStrings.visaCard, 1, image: AppImages.visa),
+    RadioOption(AppStrings.masterCard, 2, image: AppImages.master),
+    RadioOption(AppStrings.bankTransfer, 3, image: AppImages.bank),
   ];
   int selectedValue = 1;
   void setSelectedValue(int value) {
@@ -28,15 +28,15 @@ class BuyNowController extends GetxController {
 
   confirmation() {
     if (address == null) {
-      Snack().show(type: false, message: 'يرجى إضافة عنوان');
+      Snack().show(type: false, message: AppStrings.pleaseAddAddress);
       return;
     }
     if (paymentMethod == null) {
-      Snack().show(type: false, message: 'يرجى اختيار طريقة الدفع');
+      Snack().show(type: false, message: AppStrings.pleaseChoosePaymentMethod);
       return;
     }
     if (productDescription == null) {
-      Snack().show(type: false, message: 'يرجى إضافة مواصفات المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductDescription);
       return;
     }
     validate();
@@ -75,27 +75,27 @@ class BuyNowController extends GetxController {
 
   addAddress() {
     if (countryController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال اسم الدولة');
+      Snack().show(type: false, message: AppStrings.pleaseAddCountryName);
       return;
     }
     if (regionController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال اسم المنطقة');
+      Snack().show(type: false, message: AppStrings.pleaseAddRegionName);
       return;
     }
     if (cityController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال اسم المدينة');
+      Snack().show(type: false, message: AppStrings.pleaseAddCityName);
       return;
     }
     if (streetController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال اسم الشارع');
+      Snack().show(type: false, message: AppStrings.pleaseAddStreetName);
       return;
     }
     if (zipCodeController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال اسم الرمز البريدي');
+      Snack().show(type: false, message: AppStrings.pleaseAddZipCode);
       return;
     }
     if (phoneController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال رقم الهاتف');
+      Snack().show(type: false, message: AppStrings.pleaseAddPhoneNumber);
       return;
     }
     address =
@@ -118,19 +118,19 @@ class BuyNowController extends GetxController {
 
   addDescription() {
     if (productTitleController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال اسم المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductName);
       return;
     }
     if (productQuantityController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال كمية المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductQuantity);
       return;
     }
     if (productColorController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال لون المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductColor);
       return;
     }
     if (productSizeController.text.isEmpty) {
-      Snack().show(type: false, message: 'يرجى ادخال حجم المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductSize);
       return;
     }
     productDescription =

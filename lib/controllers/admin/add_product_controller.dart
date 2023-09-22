@@ -21,11 +21,11 @@ class AddProductController extends GetxController {
 
   int selectedValue = 1;
   List<RadioOption> options = [
-    RadioOption('اكسسوارات', 1),
-    RadioOption('المطرزات', 2),
-    RadioOption('الخزف', 3),
-    RadioOption('الأكاليل', 4),
-    RadioOption('خشبيات', 5),
+    RadioOption(AppStrings.accessories, 1),
+    RadioOption(AppStrings.embroideries, 2),
+    RadioOption(AppStrings.porcelain, 3),
+    RadioOption(AppStrings.wreaths, 4),
+    RadioOption(AppStrings.wooden, 5),
   ];
 
   void setSelectedValue(int value) {
@@ -48,23 +48,23 @@ class AddProductController extends GetxController {
 
   void addProduct() {
     if (nameProductController.text.isEmpty) {
-      Snack().show(type: false, message: 'من فضلك ادخل اسم المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductName);
       return;
     }
     if (descriptionProductController.text.isEmpty) {
-      Snack().show(type: false, message: 'من فضلك ادخل وصف المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductDescription2);
       return;
     }
     if (priceProductController.text.isEmpty) {
-      Snack().show(type: false, message: 'من فضلك ادخل سعر المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductPrice);
       return;
     }
     if (imageProductController.text.isEmpty) {
-      Snack().show(type: false, message: 'من فضلك اختر صورة المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductImage);
       return;
     }
     if (selectCategoryController.text.isEmpty) {
-      Snack().show(type: false, message: 'من فضلك اختر فئة المنتج');
+      Snack().show(type: false, message: AppStrings.pleaseAddProductCategory);
       return;
     }
 

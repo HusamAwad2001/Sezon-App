@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/models/shopping_model.dart';
 
 import '../../firebase/firestore/get_all_shopping.dart';
@@ -12,7 +13,7 @@ class RequestsController extends GetxController {
     getShopping();
   }
 
-  List<String> tabsSections = ['طلبات قيد التنفيذ', 'طلبات مستلمة'];
+  List<String> tabsSections = [AppStrings.shoppingPending, AppStrings.shoppingAccepted];
   late bool status;
   RxBool isLoading = false.obs;
 

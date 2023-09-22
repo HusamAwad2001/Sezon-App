@@ -31,11 +31,11 @@ class AdminNavigationController extends GetxController {
 
   int sectionIndex = 0;
   List<String> tabsSections = [
-    'اكسسوارات',
-    'المطرزات',
-    'الخزف',
-    'الأكاليل',
-    'خشبيات',
+    AppStrings.accessories,
+    AppStrings.embroideries,
+    AppStrings.porcelain,
+    AppStrings.wreaths,
+    AppStrings.wooden,
   ];
 
   @override
