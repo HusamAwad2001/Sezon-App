@@ -7,6 +7,7 @@ import 'package:sezon_app/core/constants/app_images.dart';
 import 'package:sezon_app/core/constants/app_strings.dart';
 import 'package:sezon_app/core/constants/app_styles.dart';
 import 'package:sezon_app/routes/routes.dart';
+import 'package:sezon_app/view/widgets/custom_app_bar.dart';
 
 class AdminNavigationScreen extends StatelessWidget {
   const AdminNavigationScreen({Key? key}) : super(key: key);
@@ -19,98 +20,87 @@ class AdminNavigationScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: PreferredSize(
-            preferredSize: Size(Get.width, 80.h),
-            child: SafeArea(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(.25),
-                      blurRadius: .5,
-                      offset: const Offset(0, .5),
-                    ),
-                  ],
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  controller.titleFragments[controller.selectedIndex],
-                  style: getBoldStyle(fontSize: 16.sp),
-                ),
-              ),
-            ),
-          ),
+          appBar: customAppBar(title: controller.titleFragments[controller.selectedIndex]),
           body: IndexedStack(index: controller.selectedIndex, children: controller.fragments),
-          floatingActionButton: controller.selectedIndex == 0
-              ? FloatingActionButton(
-                  onPressed: () => Get.toNamed(Routes.addProductScreen),
-                  shape: const CircleBorder(),
-                  backgroundColor: AppColors.primaryColor,
-                  elevation: 0,
-                  child: Icon(Icons.add, color: Colors.white, size: 30.w),
-                )
-              : const SizedBox(),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            currentIndex: controller.selectedIndex,
-            onTap: (index) => controller.changeIndex(index),
-            selectedItemColor: AppColors.primaryColor,
-            selectedLabelStyle: getBoldStyle(fontSize: 10.sp),
-            unselectedLabelStyle: getMediumStyle(fontSize: 8.sp),
-            items: [
-              /// Home
-              BottomNavigationBarItem(
-                icon: Image.asset(AppImages.home, width: 23.w, height: 23.h),
-                activeIcon: Image.asset(
-                  AppImages.home,
-                  width: 25.w,
-                  height: 25.h,
-                  color: AppColors.primaryColor,
-                ),
-                label: AppStrings.home,
-              ),
-
-              /// Sales
-              BottomNavigationBarItem(
-                icon: Image.asset(AppImages.sales, width: 23.w, height: 23.h),
-                activeIcon: Image.asset(
-                  AppImages.sales,
-                  width: 23.w,
-                  height: 23.h,
-                  color: AppColors.primaryColor,
-                ),
-                label: AppStrings.sales,
-              ),
-
-              /// Notifications
-              BottomNavigationBarItem(
-                icon: Image.asset(AppImages.notification, width: 23.w, height: 23.h),
-                activeIcon: Image.asset(
-                  AppImages.notification,
-                  width: 23.w,
-                  height: 23.h,
-                  color: AppColors.primaryColor,
-                ),
-                label: AppStrings.notifications,
-              ),
-
-              /// Profile
-              BottomNavigationBarItem(
-                icon: Image.asset(AppImages.profile, width: 23.w, height: 23.h),
-                activeIcon: Image.asset(
-                  AppImages.profile,
-                  width: 23.w,
-                  height: 23.h,
-                  color: AppColors.primaryColor,
-                ),
-                label: AppStrings.profile,
-              ),
-            ],
-          ),
+          floatingActionButton: _buildFloatingActionButton(controller),
+          bottomNavigationBar: _buildBottomNavigationBar(controller),
         );
       },
     );
   }
+}
+
+/// Floating Action Button
+Widget _buildFloatingActionButton(AdminNavigationController controller) {
+  return controller.selectedIndex == 0
+      ? FloatingActionButton(
+          onPressed: () => Get.toNamed(Routes.addProductScreen),
+          shape: const CircleBorder(),
+          backgroundColor: AppColors.primaryColor,
+          elevation: 0,
+          child: Icon(Icons.add, color: Colors.white, size: 30.w),
+        )
+      : const SizedBox();
+}
+
+/// Bottom Navigation Bar
+Widget _buildBottomNavigationBar(AdminNavigationController controller) {
+  return BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
+    backgroundColor: Colors.white,
+    currentIndex: controller.selectedIndex,
+    onTap: (index) => controller.changeIndex(index),
+    selectedItemColor: AppColors.primaryColor,
+    selectedLabelStyle: getBoldStyle(fontSize: 10.sp),
+    unselectedLabelStyle: getMediumStyle(fontSize: 8.sp),
+    items: [
+      /// Home
+      BottomNavigationBarItem(
+        icon: Image.asset(AppImages.home, width: 23.w, height: 23.h),
+        activeIcon: Image.asset(
+          AppImages.home,
+          width: 25.w,
+          height: 25.h,
+          color: AppColors.primaryColor,
+        ),
+        label: AppStrings.home,
+      ),
+
+      /// Sales
+      BottomNavigationBarItem(
+        icon: Image.asset(AppImages.sales, width: 23.w, height: 23.h),
+        activeIcon: Image.asset(
+          AppImages.sales,
+          width: 23.w,
+          height: 23.h,
+          color: AppColors.primaryColor,
+        ),
+        label: AppStrings.sales,
+      ),
+
+      /// Notifications
+      BottomNavigationBarItem(
+        icon: Image.asset(AppImages.notification, width: 23.w, height: 23.h),
+        activeIcon: Image.asset(
+          AppImages.notification,
+          width: 23.w,
+          height: 23.h,
+          color: AppColors.primaryColor,
+        ),
+        label: AppStrings.notifications,
+      ),
+
+      /// Profile
+      BottomNavigationBarItem(
+        icon: Image.asset(AppImages.profile, width: 23.w, height: 23.h),
+        activeIcon: Image.asset(
+          AppImages.profile,
+          width: 23.w,
+          height: 23.h,
+          color: AppColors.primaryColor,
+        ),
+        label: AppStrings.profile,
+      ),
+    ],
+  );
 }

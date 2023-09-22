@@ -20,38 +20,44 @@ class HomeFragment extends GetView<AdminNavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        /// Search Bar
-        AppTextField(
-          controller: controller.searchController,
-          hintText: AppStrings.hintSearch,
-          hintColor: AppColors.greyColor2,
-          borderRadius: 10.r,
-          backgroundColor: Colors.black.withOpacity(0.04),
-          enableBorderColor: Colors.transparent,
-          focusBorderColor: Colors.transparent,
-          prefix: SvgPicture.asset(AppImages.search, width: 20.w),
-          onChanged: (query) {
-            if (query.isNotEmpty || query != '') {
-              controller.isSearching = true;
-              controller.search(query);
-            } else {
-              controller.isSearching = false;
-            }
-            controller.update();
-          },
-        ).paddingOnly(left: 16.w, right: 16.w, top: 20.h, bottom: 30.h),
-
-        /// Tab Bar
-        const _TabBarView(),
+        _SearchBar(),
+        _TabBar(),
       ],
     );
   }
 }
 
-class _TabBarView extends GetView<AdminNavigationController> {
-  const _TabBarView({super.key});
+class _SearchBar extends GetView<AdminNavigationController> {
+  const _SearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppTextField(
+      controller: controller.searchController,
+      hintText: AppStrings.hintSearch,
+      hintColor: AppColors.greyColor2,
+      borderRadius: 10.r,
+      backgroundColor: Colors.black.withOpacity(0.04),
+      enableBorderColor: Colors.transparent,
+      focusBorderColor: Colors.transparent,
+      prefix: SvgPicture.asset(AppImages.search, width: 20.w),
+      onChanged: (query) {
+        if (query.isNotEmpty || query != '') {
+          controller.isSearching = true;
+          controller.search(query);
+        } else {
+          controller.isSearching = false;
+        }
+        controller.update();
+      },
+    ).paddingOnly(left: 16.w, right: 16.w, top: 20.h, bottom: 30.h);
+  }
+}
+
+class _TabBar extends GetView<AdminNavigationController> {
+  const _TabBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +67,13 @@ class _TabBarView extends GetView<AdminNavigationController> {
         child: Column(
           children: [
             TabBar(
-              tabs: controller.tabsSections
-                  .map((e) => Tab(
-                        child: Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
-                      ))
-                  .toList(),
+              tabs: controller.tabsSections.map(
+                (e) {
+                  return Tab(
+                    child: Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
+                  );
+                },
+              ).toList(),
               indicatorSize: TabBarIndicatorSize.label,
               indicatorWeight: .1.w,
               isScrollable: true,
@@ -80,12 +88,61 @@ class _TabBarView extends GetView<AdminNavigationController> {
             ),
             Expanded(
               child: TabBarView(
-                children: controller.tabsSections.map((e) => const _ListViewWidget()).toList(),
+                children: controller.tabsSections.map((e) => const _CheckTabBar()).toList(),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _CheckTabBar extends GetView<AdminNavigationController> {
+  const _CheckTabBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () {
+        return controller.isLoading.value
+            ? const LoadingWidget()
+            : controller.status == false
+                ? const Center(child: Text(AppStrings.somethingWentWrong))
+                : controller.products.isEmpty
+                    ? const Center(child: Text(AppStrings.emptyProducts))
+                    : GetBuilder<AdminNavigationController>(
+                        builder: (_) {
+                          return (controller.isSearching && controller.searchedProducts.isEmpty)
+                              ? Center(
+                                  child: const Text(AppStrings.emptyProducts)
+                                      .paddingOnly(bottom: 130.h))
+                              : const _ListViewWidget();
+                        },
+                      );
+      },
+    );
+  }
+}
+
+class _ListViewWidget extends GetView<AdminNavigationController> {
+  const _ListViewWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+      itemCount:
+          controller.isSearching ? controller.searchedProducts.length : controller.products.length,
+      separatorBuilder: (context, index) => Divider(
+        height: .1.h,
+        color: AppColors.greyColor,
+      ).paddingSymmetric(vertical: 10.h),
+      itemBuilder: (context, index) {
+        return controller.isSearching
+            ? _ProductItem(controller.searchedProducts[index])
+            : _ProductItem(controller.products[index]);
+      },
     );
   }
 }
@@ -157,49 +214,6 @@ class _ProductItem extends StatelessWidget {
           ],
         ).paddingOnly(left: 16.w),
       ),
-    );
-  }
-}
-
-class _ListViewWidget extends GetView<AdminNavigationController> {
-  const _ListViewWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () {
-        return controller.isLoading.value
-            ? const LoadingWidget()
-            : controller.status == false
-                ? const Center(child: Text(AppStrings.somethingWentWrong))
-                : controller.products.isEmpty
-                    ? const Center(child: Text(AppStrings.emptyProducts))
-                    : GetBuilder<AdminNavigationController>(
-                        builder: (_) {
-                          return (controller.isSearching == true &&
-                                  controller.searchedProducts.isEmpty)
-                              ? Center(
-                                  child: const Text(AppStrings.emptyProducts)
-                                      .paddingOnly(bottom: 130.h),
-                                )
-                              : ListView.separated(
-                                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                                  itemCount: controller.isSearching
-                                      ? controller.searchedProducts.length
-                                      : controller.products.length,
-                                  separatorBuilder: (context, index) => Divider(
-                                    height: .1.h,
-                                    color: AppColors.greyColor,
-                                  ).paddingSymmetric(vertical: 10.h),
-                                  itemBuilder: (context, index) {
-                                    return controller.isSearching
-                                        ? _ProductItem(controller.searchedProducts[index])
-                                        : _ProductItem(controller.products[index]);
-                                  },
-                                );
-                        },
-                      );
-      },
     );
   }
 }

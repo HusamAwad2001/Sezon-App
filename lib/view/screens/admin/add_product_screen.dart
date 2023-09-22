@@ -17,58 +17,49 @@ import 'package:sezon_app/view/widgets/loading_widget.dart';
 import '../../../core/constants/app_styles.dart';
 import '../../widgets/app_text_field.dart';
 
-class AddProductScreen extends StatelessWidget {
+class AddProductScreen extends GetView<AddProductController> {
   const AddProductScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     return Scaffold(
       appBar: customAppBar(
         title: AppStrings.addNewProduct,
         isBack: true,
       ),
-      body: const _BodyView(),
-    );
-  }
-}
+      body: SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          children: [
+            /// Title
+            20.ph,
+            const CustomTitle(title: AppStrings.addNewProduct),
 
-class _BodyView extends GetView<AddProductController> {
-  const _BodyView({super.key});
+            /// Form
+            30.ph,
+            const _FormWidget(),
 
-  @override
-  Widget build(BuildContext context) {
-    ScrollController scrollController = ScrollController();
-    return SingleChildScrollView(
-      controller: scrollController,
-      child: Column(
-        children: [
-          /// Title
-          20.ph,
-          const CustomTitle(title: AppStrings.addNewProduct),
-
-          /// Form
-          30.ph,
-          const _FormWidget(),
-
-          /// Button
-          80.ph,
-          Obx(
-            () {
-              return controller.isLoading.value
-                  ? const LoadingWidget()
-                  : AppButton(
-                      label: AppStrings.add,
-                      onPressed: () {
-                        scrollController.animateTo(0,
-                            duration: 400.milliseconds, curve: Curves.easeIn);
-                        controller.addProduct();
-                      },
-                    );
-            },
-          ),
-          100.ph,
-        ],
-      ).paddingSymmetric(horizontal: 16.w),
+            /// Button
+            80.ph,
+            Obx(
+              () {
+                return controller.isLoading.value
+                    ? const LoadingWidget()
+                    : AppButton(
+                        label: AppStrings.add,
+                        onPressed: () {
+                          scrollController.animateTo(0,
+                              duration: 400.milliseconds, curve: Curves.easeIn);
+                          controller.addProduct();
+                        },
+                      );
+              },
+            ),
+            100.ph,
+          ],
+        ).paddingSymmetric(horizontal: 16.w),
+      ),
     );
   }
 }
