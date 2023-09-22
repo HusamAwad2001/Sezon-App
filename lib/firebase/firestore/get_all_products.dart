@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sezon_app/firebase/fisestore_helper.dart';
+import '../fisestore_helper.dart';
 
 import '../../models/product_model.dart';
 
 class GetAllProducts {
-  static Future<(List<ProductModel> products, bool status)> call(String category) async {
+  static Future<(List<ProductModel> products, bool status)> call(
+      String category) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirestoreHelper.firestore
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirestoreHelper
+          .firestore
           .collection('products')
           .where('category', isEqualTo: category)
           .get();

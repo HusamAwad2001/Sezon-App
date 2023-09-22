@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sezon_app/core/constants/app_themes.dart';
-import 'package:sezon_app/firebase_options.dart';
+import 'core/constants/app_themes.dart';
+import 'firebase_options.dart';
 
 import '../routes/pages.dart';
 import '../routes/routes.dart';

@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/user/favorite_controller.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
+import '../../../../../controllers/user/favorite_controller.dart';
+import '../../../../../core/constants/empty_padding.dart';
 
 import '../../../../../controllers/user/user_navigation_controller.dart';
 import '../../../../../core/constants/app_colors.dart';
@@ -31,7 +31,8 @@ class FavoriteFragment extends StatelessWidget {
                   color: AppColors.greyColor.withOpacity(.4),
                 ).paddingSymmetric(vertical: 7.h),
                 itemBuilder: (context, index) {
-                  final item = ProductModel.fromJson(controller.favoritesList[index]);
+                  final item =
+                      ProductModel.fromJson(controller.favoritesList[index]);
                   return _FavoriteItem(productModel: item, index: index);
                 },
               );
@@ -44,7 +45,8 @@ class _FavoriteItem extends StatelessWidget {
   final int index;
   final ProductModel productModel;
 
-  const _FavoriteItem({super.key, required this.productModel, required this.index});
+  const _FavoriteItem(
+      {super.key, required this.productModel, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +108,16 @@ class _FavoriteItem extends StatelessWidget {
                         onTap: () {
                           Get.find<FavoriteController>().deleteProduct(index);
                         },
-                        child: const Icon(Icons.delete, color: AppColors.primaryColor),
+                        child: const Icon(Icons.delete,
+                            color: AppColors.primaryColor),
                       ),
                     ],
                   ),
                   6.ph,
                   Text(
                     '${productModel.price.toString()} ر.س',
-                    style: getBoldStyle(fontSize: 12.sp, color: AppColors.primaryColor),
+                    style: getBoldStyle(
+                        fontSize: 12.sp, color: AppColors.primaryColor),
                   ),
                 ],
               ),

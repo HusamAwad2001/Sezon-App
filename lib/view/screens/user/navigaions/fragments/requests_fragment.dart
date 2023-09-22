@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
+import '../../../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/empty_padding.dart';
 
 import '../../../../../controllers/user/requests_controller.dart';
 import '../../../../../core/constants/app_strings.dart';
@@ -27,7 +27,9 @@ class RequestsFragment extends StatelessWidget {
               const _TabBar(),
               Expanded(
                 child: TabBarView(
-                  children: controller.tabsSections.map((e) => const _ListViewWidget()).toList(),
+                  children: controller.tabsSections
+                      .map((e) => const _ListViewWidget())
+                      .toList(),
                 ),
               ),
             ],
@@ -46,7 +48,8 @@ class _TabBar extends GetView<RequestsController> {
     return TabBar(
       tabs: controller.tabsSections
           .map((e) => Tab(
-                child: Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
+                child:
+                    Text(e.toString(), style: getMediumStyle(fontSize: 13.sp)),
               ))
           .toList(),
       indicatorSize: TabBarIndicatorSize.tab,
@@ -81,7 +84,8 @@ class _ListViewWidget extends GetView<RequestsController> {
                         ),
                       )
                     : ListView.separated(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.w, vertical: 10.h),
                         itemCount: controller.myRequests.length,
                         separatorBuilder: (context, index) => Divider(
                           height: .1.h,

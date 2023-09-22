@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sezon_app/models/product_model.dart';
+import '../../models/product_model.dart';
 
 import '../../core/storage/global.dart';
 import '../../core/storage/storage.dart';

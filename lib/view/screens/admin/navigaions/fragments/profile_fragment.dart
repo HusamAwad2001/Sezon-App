@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/core/storage/global.dart';
-import 'package:sezon_app/core/storage/storage.dart';
-import 'package:sezon_app/routes/routes.dart';
+import '../../../../../core/constants/empty_padding.dart';
+import '../../../../../core/storage/global.dart';
+import '../../../../../core/storage/storage.dart';
+import '../../../../../routes/routes.dart';
 
 import '../../../../widgets/app_button.dart';
 

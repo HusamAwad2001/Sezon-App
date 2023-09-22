@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/admin/admin_navigation_controller.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/routes/routes.dart';
-import 'package:sezon_app/view/widgets/custom_app_bar.dart';
+import '../../../../controllers/admin/admin_navigation_controller.dart';
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_images.dart';
+import '../../../../core/constants/app_strings.dart';
+import '../../../../core/constants/app_styles.dart';
+import '../../../../routes/routes.dart';
+import '../../../widgets/custom_app_bar.dart';
 
 class AdminNavigationScreen extends StatelessWidget {
   const AdminNavigationScreen({Key? key}) : super(key: key);
@@ -20,8 +20,10 @@ class AdminNavigationScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: customAppBar(title: controller.titleFragments[controller.selectedIndex]),
-          body: IndexedStack(index: controller.selectedIndex, children: controller.fragments),
+          appBar: customAppBar(
+              title: controller.titleFragments[controller.selectedIndex]),
+          body: IndexedStack(
+              index: controller.selectedIndex, children: controller.fragments),
           floatingActionButton: _buildFloatingActionButton(controller),
           bottomNavigationBar: _buildBottomNavigationBar(controller),
         );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/view/widgets/snack.dart';
+import '../../view/widgets/snack.dart';
 
 import '../../core/constants/shared_functions.dart';
 import '../../core/storage/global.dart';
@@ -40,7 +40,8 @@ class LoginController extends GetxController {
         phone: phoneController.text,
         password: generateMd5(passwordController.text),
       );
-      bool isLoggedIn = await FirebaseAuthHelper.instance.login(userModel: userModel);
+      bool isLoggedIn =
+          await FirebaseAuthHelper.instance.login(userModel: userModel);
       if (isLoggedIn) {
         await Storage.getData();
         Global.user['role'] == 'admin'

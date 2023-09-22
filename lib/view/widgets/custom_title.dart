@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
+import '../../core/constants/empty_padding.dart';
 
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_styles.dart';

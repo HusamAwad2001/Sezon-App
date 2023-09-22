@@ -5,9 +5,9 @@ import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/view/widgets/custom_title.dart';
+import 'app_colors.dart';
+import 'empty_padding.dart';
+import '../../view/widgets/custom_title.dart';
 
 import '../../view/widgets/snack.dart';
 

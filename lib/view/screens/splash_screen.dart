@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/storage/storage.dart';
-import 'package:sezon_app/routes/routes.dart';
+import '../../core/constants/app_images.dart';
+import '../../core/storage/storage.dart';
+import '../../routes/routes.dart';
 
 import '../../core/storage/global.dart';
 

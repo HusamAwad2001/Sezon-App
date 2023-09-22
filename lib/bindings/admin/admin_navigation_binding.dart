@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/admin/admin_navigation_controller.dart';
+import '../../controllers/admin/admin_navigation_controller.dart';
 
 class AdminNavigationBinding extends Bindings {
   @override

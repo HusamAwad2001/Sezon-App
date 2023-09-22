@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
+import '../../../../../core/constants/app_images.dart';
+import '../../../../../core/constants/app_styles.dart';
+import '../../../../../core/constants/empty_padding.dart';
 
 class SalesFragment extends StatelessWidget {
   const SalesFragment({Key? key}) : super(key: key);
@@ -55,7 +55,8 @@ class _SalesItem extends StatelessWidget {
                   style: getBoldStyle(fontSize: 13.sp),
                 ),
                 Text(
-                  'هذا النص هو مثال لنص يمكن أن يستبدل توليد هذا النص من مولد النص العربى' * 2,
+                  'هذا النص هو مثال لنص يمكن أن يستبدل توليد هذا النص من مولد النص العربى' *
+                      2,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: getRegularStyle(fontSize: 11.sp),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_styles.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
@@ -76,12 +76,15 @@ class AppTextField extends StatelessWidget {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       onChanged: onChanged,
-      style: TextStyle(color: textColor ?? Colors.black, fontSize: fontSize ?? 14.sp),
+      style: TextStyle(
+          color: textColor ?? Colors.black, fontSize: fontSize ?? 14.sp),
       cursorColor: hintColor ?? AppColors.primaryColor,
       decoration: InputDecoration(
         enabled: isEnabled,
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintStyle: TextStyle(color: hintColor ?? AppColors.hintColor, fontSize: hintSize ?? 11.sp),
+        hintStyle: TextStyle(
+            color: hintColor ?? AppColors.hintColor,
+            fontSize: hintSize ?? 11.sp),
         hintText: hintText,
         labelStyle: getRegularStyle(
           color: AppColors.primaryColor,
@@ -101,13 +104,16 @@ class AppTextField extends StatelessWidget {
         counter: const SizedBox.shrink(),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: BorderSide(color: enableBorderColor ?? AppColors.hintColor)),
+            borderSide:
+                BorderSide(color: enableBorderColor ?? AppColors.hintColor)),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: BorderSide(color: enableBorderColor ?? AppColors.hintColor)),
+            borderSide:
+                BorderSide(color: enableBorderColor ?? AppColors.hintColor)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-            borderSide: BorderSide(color: focusBorderColor ?? AppColors.primaryColor)),
+            borderSide:
+                BorderSide(color: focusBorderColor ?? AppColors.primaryColor)),
         filled: true,
         prefixIcon: prefix == null
             ? const SizedBox()
@@ -141,7 +147,8 @@ class AppTextField extends StatelessWidget {
                     minHeight: kMinInteractiveDimension,
                   ),
                 ),
-        contentPadding: EdgeInsets.symmetric(vertical: vPadding, horizontal: hPadding),
+        contentPadding:
+            EdgeInsets.symmetric(vertical: vPadding, horizontal: hPadding),
         fillColor: backgroundColor ?? Colors.white,
         isDense: true,
       ),

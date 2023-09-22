@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/admin/add_product_controller.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/core/constants/shared_functions.dart';
-import 'package:sezon_app/view/widgets/app_button.dart';
-import 'package:sezon_app/view/widgets/custom_app_bar.dart';
-import 'package:sezon_app/view/widgets/custom_radio.dart';
-import 'package:sezon_app/view/widgets/custom_title.dart';
-import 'package:sezon_app/view/widgets/loading_widget.dart';
+import '../../../controllers/admin/add_product_controller.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_images.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/constants/empty_padding.dart';
+import '../../../core/constants/shared_functions.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/custom_radio.dart';
+import '../../widgets/custom_title.dart';
+import '../../widgets/loading_widget.dart';
 
 import '../../../core/constants/app_styles.dart';
 import '../../widgets/app_text_field.dart';
@@ -109,7 +109,8 @@ class _FormWidget extends GetView<AddProductController> {
         ),
         20.ph,
         GestureDetector(
-          onTap: () => openBottomSheet(AppStrings.addNewProduct, const _BodyBottomSheet()),
+          onTap: () => openBottomSheet(
+              AppStrings.addNewProduct, const _BodyBottomSheet()),
           child: AppTextField(
             controller: controller.selectCategoryController,
             isEnabled: false,
@@ -164,7 +165,8 @@ class _BodyBottomSheet extends GetView<AddProductController> {
                           ).paddingSymmetric(vertical: 22.h),
                           option.value == controller.options.length
                               ? 0.ph
-                              : Divider(height: .1.h, color: AppColors.greyColor),
+                              : Divider(
+                                  height: .1.h, color: AppColors.greyColor),
                         ],
                       ),
                     ),

@@ -1,6 +1,6 @@
-import 'package:sezon_app/firebase/firestore/get_all_users.dart';
-import 'package:sezon_app/firebase/firestore/set_user_data.dart';
-import 'package:sezon_app/models/user_model.dart';
+import 'firestore/get_all_users.dart';
+import 'firestore/set_user_data.dart';
+import '../models/user_model.dart';
 
 class FirebaseAuthHelper {
   FirebaseAuthHelper._();

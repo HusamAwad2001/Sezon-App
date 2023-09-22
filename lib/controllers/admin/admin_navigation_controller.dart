@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/firebase/firestore/get_all_products.dart';
-import 'package:sezon_app/models/product_model.dart';
-import 'package:sezon_app/view/screens/admin/navigaions/fragments/home_fragment.dart';
-import 'package:sezon_app/view/screens/admin/navigaions/fragments/notifications_fragment.dart';
-import 'package:sezon_app/view/screens/admin/navigaions/fragments/profile_fragment.dart';
-import 'package:sezon_app/view/screens/admin/navigaions/fragments/sales_fragment.dart';
+import '../../core/constants/app_strings.dart';
+import '../../firebase/firestore/get_all_products.dart';
+import '../../models/product_model.dart';
+import '../../view/screens/admin/navigaions/fragments/home_fragment.dart';
+import '../../view/screens/admin/navigaions/fragments/notifications_fragment.dart';
+import '../../view/screens/admin/navigaions/fragments/profile_fragment.dart';
+import '../../view/screens/admin/navigaions/fragments/sales_fragment.dart';
 
 class AdminNavigationController extends GetxController {
   int selectedIndex = 0;
@@ -49,7 +49,8 @@ class AdminNavigationController extends GetxController {
   RxBool isLoading = false.obs;
   getAllProducts() async {
     isLoading.value = true;
-    (List<ProductModel>, bool) data = await GetAllProducts.call(tabsSections[sectionIndex]);
+    (List<ProductModel>, bool) data =
+        await GetAllProducts.call(tabsSections[sectionIndex]);
     products = data.$1;
     status = data.$2;
     isLoading.value = false;
@@ -60,7 +61,8 @@ class AdminNavigationController extends GetxController {
   bool isSearching = false;
   search(String query) {
     searchedProducts = products
-        .where((element) => element.name.toLowerCase().startsWith(query.toLowerCase()))
+        .where((element) =>
+            element.name.toLowerCase().startsWith(query.toLowerCase()))
         .toList();
     update();
   }

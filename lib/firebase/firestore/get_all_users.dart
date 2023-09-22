@@ -1,18 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sezon_app/firebase/fisestore_helper.dart';
+import '../fisestore_helper.dart';
 
 import '../../core/storage/storage.dart';
 import '../../models/user_model.dart';
 import '../../view/widgets/snack.dart';
 
 class GetAllUsers {
-  static Future<bool> call({required String phone, required String password}) async {
+  static Future<bool> call(
+      {required String phone, required String password}) async {
     try {
-      QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirestoreHelper.firestore
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await FirestoreHelper
+          .firestore
           .collection('users')
           .where('phone', isEqualTo: phone)
           .get();
-      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents = querySnapshot.docs;
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> documents =
+          querySnapshot.docs;
       if (documents.isEmpty) {
         Snack().show(type: false, message: 'رقم الهاتف غير صحيح');
         return false;

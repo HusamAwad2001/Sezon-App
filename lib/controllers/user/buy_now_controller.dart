@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/firebase/firestore/set_shopping.dart';
-import 'package:sezon_app/models/product_model.dart';
-import 'package:sezon_app/models/shopping_model.dart';
-import 'package:sezon_app/view/widgets/snack.dart';
+import '../../core/constants/app_images.dart';
+import '../../core/constants/app_strings.dart';
+import '../../firebase/firestore/set_shopping.dart';
+import '../../models/product_model.dart';
+import '../../models/shopping_model.dart';
+import '../../view/widgets/snack.dart';
 
 import '../../core/storage/global.dart';
 import '../../models/radio_option.dart';
@@ -24,7 +24,8 @@ class BuyNowController extends GetxController {
     update();
   }
 
-  bool get isReady => address != null && paymentMethod != null && productDescription != null;
+  bool get isReady =>
+      address != null && paymentMethod != null && productDescription != null;
 
   confirmation() {
     if (address == null) {
@@ -36,7 +37,8 @@ class BuyNowController extends GetxController {
       return;
     }
     if (productDescription == null) {
-      Snack().show(type: false, message: AppStrings.pleaseAddProductDescription);
+      Snack()
+          .show(type: false, message: AppStrings.pleaseAddProductDescription);
       return;
     }
     validate();

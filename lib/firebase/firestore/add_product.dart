@@ -1,13 +1,14 @@
 import 'dart:io';
 
-import 'package:sezon_app/firebase/fisestore_helper.dart';
+import '../fisestore_helper.dart';
 
 import '../../models/product_model.dart';
 import '../../view/widgets/snack.dart';
 import '../storage_helper.dart';
 
 class AddProduct {
-  static Future<(String, bool)> call(ProductModel productModel, File fileImg) async {
+  static Future<(String, bool)> call(
+      ProductModel productModel, File fileImg) async {
     try {
       ({bool status, String url}) uploaded =
           await StorageHelper.instance.uploadImage('products', fileImg);

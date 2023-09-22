@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sezon_app/controllers/admin/admin_navigation_controller.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/view/widgets/snack.dart';
+import 'admin_navigation_controller.dart';
+import '../../core/constants/app_strings.dart';
+import '../../view/widgets/snack.dart';
 
 import '../../core/constants/shared_functions.dart';
 import '../../firebase/firestore/add_product.dart';
@@ -52,7 +52,8 @@ class AddProductController extends GetxController {
       return;
     }
     if (descriptionProductController.text.isEmpty) {
-      Snack().show(type: false, message: AppStrings.pleaseAddProductDescription2);
+      Snack()
+          .show(type: false, message: AppStrings.pleaseAddProductDescription2);
       return;
     }
     if (priceProductController.text.isEmpty) {

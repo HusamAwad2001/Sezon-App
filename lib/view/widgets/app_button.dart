@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
+import '../../core/constants/app_styles.dart';
 
 import '../../core/constants/app_colors.dart';
 
@@ -54,7 +54,9 @@ class AppButton extends StatelessWidget {
       child: prefix == null
           ? Text(
               label,
-              style: style ?? getBoldStyle(color: textColor ?? Colors.white, fontSize: 14.sp),
+              style: style ??
+                  getBoldStyle(
+                      color: textColor ?? Colors.white, fontSize: 14.sp),
             )
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +65,9 @@ class AppButton extends StatelessWidget {
                 SizedBox(width: 12.w),
                 Text(
                   label,
-                  style: style ?? TextStyle(color: textColor ?? Colors.white, fontSize: fontSize),
+                  style: style ??
+                      TextStyle(
+                          color: textColor ?? Colors.white, fontSize: fontSize),
                 ),
               ],
             ),

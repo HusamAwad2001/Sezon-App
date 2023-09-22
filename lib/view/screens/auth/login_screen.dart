@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/auth/login_controller.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/routes/routes.dart';
-import 'package:sezon_app/view/widgets/app_button.dart';
-import 'package:sezon_app/view/widgets/app_text_field.dart';
-import 'package:sezon_app/view/widgets/auth/exist_account.dart';
-import 'package:sezon_app/view/widgets/auth/image_clipper.dart';
-import 'package:sezon_app/view/widgets/loading_widget.dart';
+import '../../../controllers/auth/login_controller.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/constants/app_styles.dart';
+import '../../../core/constants/empty_padding.dart';
+import '../../../routes/routes.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/app_text_field.dart';
+import '../../widgets/auth/exist_account.dart';
+import '../../widgets/auth/image_clipper.dart';
+import '../../widgets/loading_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

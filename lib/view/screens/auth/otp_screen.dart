@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sezon_app/controllers/auth/otp_controller.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/view/widgets/app_button.dart';
-import 'package:sezon_app/view/widgets/auth/image_clipper.dart';
+import '../../../controllers/auth/otp_controller.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/constants/app_styles.dart';
+import '../../../core/constants/empty_padding.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/auth/image_clipper.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({Key? key}) : super(key: key);
@@ -61,7 +61,8 @@ class _BodyView extends GetView<OtpController> {
               Pinput(
                 controller: controller.pinController,
                 focusNode: controller.focusNode,
-                androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
+                androidSmsAutofillMethod:
+                    AndroidSmsAutofillMethod.smsUserConsentApi,
                 listenForMultipleSmsOnAndroid: true,
                 defaultPinTheme: controller.defaultPinTheme,
                 separatorBuilder: (index) => const SizedBox(width: 8),

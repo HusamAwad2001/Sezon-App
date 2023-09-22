@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
+import '../../../core/constants/app_images.dart';
 
 class ImageClipper extends StatelessWidget {
   const ImageClipper({Key? key}) : super(key: key);
@@ -18,7 +18,8 @@ class ImageClipper extends StatelessWidget {
         ),
       ),
       alignment: Alignment.topCenter,
-      child: Image.asset(AppImages.appLogo, width: 70.w, height: 100.h).paddingOnly(top: 65.h),
+      child: Image.asset(AppImages.appLogo, width: 70.w, height: 100.h)
+          .paddingOnly(top: 65.h),
     );
   }
 }

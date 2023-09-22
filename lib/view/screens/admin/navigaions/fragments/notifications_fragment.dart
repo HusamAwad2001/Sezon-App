@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
+import '../../../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/app_images.dart';
+import '../../../../../core/constants/app_styles.dart';
 
 class NotificationsFragment extends StatelessWidget {
   const NotificationsFragment({Key? key}) : super(key: key);
@@ -12,7 +12,8 @@ class NotificationsFragment extends StatelessWidget {
     return ListView.separated(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       itemCount: 10,
-      separatorBuilder: (context, index) => const Divider(height: 2, color: AppColors.greyColor),
+      separatorBuilder: (context, index) =>
+          const Divider(height: 2, color: AppColors.greyColor),
       itemBuilder: (context, index) {
         return ListTile(
           contentPadding: EdgeInsets.zero,

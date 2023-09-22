@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/view/screens/user/navigaions/fragments/category_fragment.dart';
-import 'package:sezon_app/view/screens/user/navigaions/fragments/favorite_fragment.dart';
-import 'package:sezon_app/view/screens/user/navigaions/fragments/home_fragment.dart';
-import 'package:sezon_app/view/screens/user/navigaions/fragments/requests_fragment.dart';
+import '../../core/constants/app_images.dart';
+import '../../core/constants/app_strings.dart';
+import '../../view/screens/user/navigaions/fragments/category_fragment.dart';
+import '../../view/screens/user/navigaions/fragments/favorite_fragment.dart';
+import '../../view/screens/user/navigaions/fragments/home_fragment.dart';
+import '../../view/screens/user/navigaions/fragments/requests_fragment.dart';
 
 import '../../firebase/firestore/get_all_products.dart';
 import '../../models/product_model.dart';
@@ -62,7 +62,8 @@ class UserNavigationController extends GetxController {
 
   search(String query) {
     searchedProducts = products
-        .where((element) => element.name.toLowerCase().startsWith(query.toLowerCase()))
+        .where((element) =>
+            element.name.toLowerCase().startsWith(query.toLowerCase()))
         .toList();
     update();
   }

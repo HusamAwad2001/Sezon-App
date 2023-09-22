@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/models/product_model.dart';
-import 'package:sezon_app/view/widgets/custom_app_bar.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/constants/app_styles.dart';
+import '../../../core/constants/empty_padding.dart';
+import '../../../models/product_model.dart';
+import '../../widgets/custom_app_bar.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../widgets/loading_widget.dart';
@@ -27,7 +27,8 @@ class AdminProductDetailsScreen extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: productModel.imageUrl!,
               placeholder: (context, url) => const LoadingWidget(),
-              errorWidget: (context, url, error) => Center(child: Icon(Icons.error, size: 30.w)),
+              errorWidget: (context, url, error) =>
+                  Center(child: Icon(Icons.error, size: 30.w)),
               fit: BoxFit.fitWidth,
             ),
           ),
@@ -46,7 +47,8 @@ class AdminProductDetailsScreen extends StatelessWidget {
               /// Price
               Text(
                 '${productModel.price.toString()} ر.س',
-                style: getBoldStyle(fontSize: 15.sp, color: AppColors.primaryColor),
+                style: getBoldStyle(
+                    fontSize: 15.sp, color: AppColors.primaryColor),
               ),
               10.ph,
 

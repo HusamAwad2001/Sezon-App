@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/user/buy_now_controller.dart';
-import 'package:sezon_app/core/constants/app_images.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/core/constants/shared_functions.dart';
-import 'package:sezon_app/view/widgets/app_button.dart';
-import 'package:sezon_app/view/widgets/app_text_field.dart';
-import 'package:sezon_app/view/widgets/custom_app_bar.dart';
-import 'package:sezon_app/view/widgets/loading_widget.dart';
+import '../../../controllers/user/buy_now_controller.dart';
+import '../../../core/constants/app_images.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/constants/app_styles.dart';
+import '../../../core/constants/empty_padding.dart';
+import '../../../core/constants/shared_functions.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/app_text_field.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/loading_widget.dart';
 
 import '../../../core/constants/app_colors.dart';
 import '../../widgets/custom_radio.dart';
@@ -29,7 +29,8 @@ class BuyNowScreen extends StatelessWidget {
     }
 
     addProductSpecifications() {
-      openBottomSheet(AppStrings.addProductSpecifications, const _AddProductSpecificationsSheet());
+      openBottomSheet(AppStrings.addProductSpecifications,
+          const _AddProductSpecificationsSheet());
     }
 
     return GetBuilder<BuyNowController>(
@@ -37,7 +38,8 @@ class BuyNowScreen extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: Colors.white,
-          appBar: customAppBar(title: AppStrings.completeYourPurchase, isBack: true),
+          appBar: customAppBar(
+              title: AppStrings.completeYourPurchase, isBack: true),
           body: Column(
             children: [
               /// Address
@@ -238,7 +240,8 @@ class _PaymentMethodSheet extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Image.asset(option.image!, height: 20.h, fit: BoxFit.cover),
+                              Image.asset(option.image!,
+                                  height: 20.h, fit: BoxFit.cover),
                               8.pw,
                               Text(
                                 option.label,
@@ -253,7 +256,8 @@ class _PaymentMethodSheet extends StatelessWidget {
                           ).paddingSymmetric(vertical: 22.h),
                           option.value == controller.options.length
                               ? 0.ph
-                              : Divider(height: .1.h, color: AppColors.greyColor),
+                              : Divider(
+                                  height: .1.h, color: AppColors.greyColor),
                         ],
                       ),
                     ),
@@ -264,7 +268,8 @@ class _PaymentMethodSheet extends StatelessWidget {
             AppButton(
               label: AppStrings.next,
               onPressed: () {
-                controller.paymentMethod = controller.options[controller.selectedValue - 1].label;
+                controller.paymentMethod =
+                    controller.options[controller.selectedValue - 1].label;
                 controller.update();
                 Get.back();
               },
@@ -371,7 +376,8 @@ class _CardDataWidget extends StatelessWidget {
           15.pw,
           GestureDetector(
             onTap: onTap,
-            child: Icon(Icons.edit_note, color: AppColors.primaryColor, size: 30.w),
+            child: Icon(Icons.edit_note,
+                color: AppColors.primaryColor, size: 30.w),
           ),
         ],
       ).paddingSymmetric(horizontal: 16.w, vertical: 18.h),

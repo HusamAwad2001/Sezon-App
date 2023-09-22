@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/shared_functions.dart';
-import 'package:sezon_app/core/storage/storage.dart';
-import 'package:sezon_app/firebase/auth_helper.dart';
-import 'package:sezon_app/models/user_model.dart';
+import '../../core/constants/shared_functions.dart';
+import '../../core/storage/storage.dart';
+import '../../firebase/auth_helper.dart';
+import '../../models/user_model.dart';
 
 import '../../core/storage/global.dart';
 import '../../routes/routes.dart';
@@ -54,7 +54,8 @@ class RegisterController extends GetxController {
         phone: phoneController.text,
         password: generateMd5(passwordController.text),
       );
-      bool isRegister = await FirebaseAuthHelper.instance.register(userModel: userModel);
+      bool isRegister =
+          await FirebaseAuthHelper.instance.register(userModel: userModel);
       if (isRegister) {
         await Storage.instance.write('user', userModel.toJson());
         Storage.getData();

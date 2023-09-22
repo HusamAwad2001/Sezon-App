@@ -1,4 +1,4 @@
-import 'package:sezon_app/models/product_model.dart';
+import 'product_model.dart';
 
 class ShoppingModel {
   String? id;

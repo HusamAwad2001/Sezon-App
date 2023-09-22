@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/user/user_navigation_controller.dart';
-import 'package:sezon_app/core/constants/app_colors.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
+import '../../../../../controllers/user/user_navigation_controller.dart';
+import '../../../../../core/constants/app_colors.dart';
+import '../../../../../core/constants/empty_padding.dart';
 
 import '../../../../../controllers/user/favorite_controller.dart';
 import '../../../../../core/constants/app_strings.dart';
@@ -22,7 +22,8 @@ class CategoryFragment extends StatelessWidget {
       builder: (controller) {
         List data = controller.products
             .where((element) =>
-                element.category == controller.tabsSections[controller.sectionIndex]['name']!)
+                element.category ==
+                controller.tabsSections[controller.sectionIndex]['name']!)
             .toList();
 
         return Row(
@@ -38,8 +39,10 @@ class CategoryFragment extends StatelessWidget {
                       : data.isEmpty
                           ? const Center(child: Text(AppStrings.emptyProducts))
                           : GridView.builder(
-                              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15.w, vertical: 10.h),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 childAspectRatio: 0.8,
                                 crossAxisSpacing: 19.w,
@@ -94,7 +97,8 @@ class _CategoriesRightWidget extends GetView<UserNavigationController> {
                       curve: Curves.easeIn,
                       width: 3.w,
                       height: 100.h,
-                      color: controller.tabsSections.indexOf(e) == controller.sectionIndex
+                      color: controller.tabsSections.indexOf(e) ==
+                              controller.sectionIndex
                           ? AppColors.primaryColor
                           : Colors.transparent,
                     ),
@@ -202,7 +206,8 @@ class _ProductItem extends StatelessWidget {
                 5.ph,
                 Text(
                   '${productModel.price} ر.س',
-                  style: getBoldStyle(fontSize: 8.sp, color: AppColors.primaryColor),
+                  style: getBoldStyle(
+                      fontSize: 8.sp, color: AppColors.primaryColor),
                 ),
               ],
             ),

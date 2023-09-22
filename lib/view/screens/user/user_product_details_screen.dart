@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/core/constants/app_strings.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/models/product_model.dart';
-import 'package:sezon_app/routes/routes.dart';
-import 'package:sezon_app/view/widgets/app_button.dart';
-import 'package:sezon_app/view/widgets/custom_app_bar.dart';
-import 'package:sezon_app/view/widgets/custom_title.dart';
+import '../../../core/constants/app_strings.dart';
+import '../../../core/constants/app_styles.dart';
+import '../../../core/constants/empty_padding.dart';
+import '../../../models/product_model.dart';
+import '../../../routes/routes.dart';
+import '../../widgets/app_button.dart';
+import '../../widgets/custom_app_bar.dart';
+import '../../widgets/custom_title.dart';
 
 import '../../../controllers/user/favorite_controller.dart';
 import '../../../controllers/user/user_navigation_controller.dart';
@@ -36,7 +36,8 @@ class UserProductDetailsScreen extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: productModel.imageUrl!,
               placeholder: (context, url) => const LoadingWidget(),
-              errorWidget: (context, url, error) => Center(child: Icon(Icons.error, size: 30.w)),
+              errorWidget: (context, url, error) =>
+                  Center(child: Icon(Icons.error, size: 30.w)),
               fit: BoxFit.cover,
               width: Get.width,
               height: 235.h,
@@ -56,7 +57,8 @@ class UserProductDetailsScreen extends StatelessWidget {
                 /// Price
                 Text(
                   '${productModel.price.toString()} ر.س',
-                  style: getBoldStyle(fontSize: 15.sp, color: AppColors.primaryColor),
+                  style: getBoldStyle(
+                      fontSize: 15.sp, color: AppColors.primaryColor),
                 ).paddingSymmetric(horizontal: 16.w),
                 10.ph,
 
@@ -81,10 +83,12 @@ class UserProductDetailsScreen extends StatelessWidget {
                       ? Card(
                           color: Colors.grey.withOpacity(.2),
                           elevation: 0,
-                          child: const Center(child: Text(AppStrings.relatedEmptyProducts)),
+                          child: const Center(
+                              child: Text(AppStrings.relatedEmptyProducts)),
                         )
                       : ListView.separated(
-                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16.w, vertical: 5.h),
                           scrollDirection: Axis.horizontal,
                           itemCount: products.length,
                           separatorBuilder: (context, index) => 10.pw,
@@ -96,7 +100,8 @@ class UserProductDetailsScreen extends StatelessWidget {
 
                 /// Add to Favorite and Buy Now
                 16.ph,
-                _BottomButtonsWidget(productModel: productModel).paddingSymmetric(horizontal: 16.w),
+                _BottomButtonsWidget(productModel: productModel)
+                    .paddingSymmetric(horizontal: 16.w),
               ],
             )
           ],
@@ -165,7 +170,8 @@ class _ProductItem extends StatelessWidget {
                 5.ph,
                 Text(
                   '${productModel.price} ر.س',
-                  style: getBoldStyle(fontSize: 8.sp, color: AppColors.primaryColor),
+                  style: getBoldStyle(
+                      fontSize: 8.sp, color: AppColors.primaryColor),
                 ),
               ],
             ),
@@ -229,12 +235,14 @@ class _BottomButtonsWidget extends StatelessWidget {
                 borderColor: AppColors.primaryColor,
                 borderRadius: 0,
                 onPressed: () {
-                  FavoriteController favoriteController = Get.find<FavoriteController>();
+                  FavoriteController favoriteController =
+                      Get.find<FavoriteController>();
                   var isExist = favoriteController.favoritesList
                       .any((element) => element['id'] == productModel.id);
 
                   if (isExist) {
-                    Snack().show(type: true, message: AppStrings.productIsExist);
+                    Snack()
+                        .show(type: true, message: AppStrings.productIsExist);
                   } else {
                     favoriteController.addProduct(productModel);
                     Snack().show(type: true, message: AppStrings.added);
@@ -253,7 +261,8 @@ class _BottomButtonsWidget extends StatelessWidget {
               child: AppButton(
                 label: AppStrings.buyNow,
                 borderRadius: 0,
-                onPressed: () => Get.toNamed(Routes.buyNowScreen, arguments: productModel),
+                onPressed: () =>
+                    Get.toNamed(Routes.buyNowScreen, arguments: productModel),
               ),
             ),
           ),

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:sezon_app/controllers/user/favorite_controller.dart';
-import 'package:sezon_app/controllers/user/user_navigation_controller.dart';
-import 'package:sezon_app/core/constants/app_styles.dart';
-import 'package:sezon_app/core/constants/empty_padding.dart';
-import 'package:sezon_app/view/widgets/custom_title.dart';
+import '../../../../../controllers/user/favorite_controller.dart';
+import '../../../../../controllers/user/user_navigation_controller.dart';
+import '../../../../../core/constants/app_styles.dart';
+import '../../../../../core/constants/empty_padding.dart';
+import '../../../../widgets/custom_title.dart';
 
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_images.dart';
@@ -29,7 +29,8 @@ class HomeFragment extends GetView<UserNavigationController> {
           const _SearchBar(),
 
           /// Categories
-          const CustomTitle(title: AppStrings.categories).paddingSymmetric(horizontal: 16.w),
+          const CustomTitle(title: AppStrings.categories)
+              .paddingSymmetric(horizontal: 16.w),
           10.ph,
           Row(
             children: [
@@ -38,19 +39,24 @@ class HomeFragment extends GetView<UserNavigationController> {
                 image: AppImages.category1,
               ),
               18.pw,
-              const _CategoryItem(title: AppStrings.wreaths, image: AppImages.category2),
+              const _CategoryItem(
+                  title: AppStrings.wreaths, image: AppImages.category2),
               18.pw,
-              const _CategoryItem(title: AppStrings.embroideries, image: AppImages.category3),
+              const _CategoryItem(
+                  title: AppStrings.embroideries, image: AppImages.category3),
               18.pw,
-              const _CategoryItem(title: AppStrings.wooden, image: AppImages.category4),
+              const _CategoryItem(
+                  title: AppStrings.wooden, image: AppImages.category4),
               18.pw,
-              const _CategoryItem(title: AppStrings.accessories, image: AppImages.category5),
+              const _CategoryItem(
+                  title: AppStrings.accessories, image: AppImages.category5),
             ],
           ).paddingSymmetric(horizontal: 16.w),
 
           /// Products
           20.ph,
-          const CustomTitle(title: AppStrings.products).paddingSymmetric(horizontal: 16.w),
+          const CustomTitle(title: AppStrings.products)
+              .paddingSymmetric(horizontal: 16.w),
           const _StatusGridView(),
         ],
       ),
@@ -162,8 +168,9 @@ class _GridView extends GetView<UserNavigationController> {
         crossAxisSpacing: 19.w,
         mainAxisSpacing: 19.h,
       ),
-      itemCount:
-          controller.isSearching ? controller.searchedProducts.length : controller.products.length,
+      itemCount: controller.isSearching
+          ? controller.searchedProducts.length
+          : controller.products.length,
       itemBuilder: (context, index) {
         // return const _ProductItem();
         return controller.isSearching
@@ -233,7 +240,8 @@ class _ProductItem extends StatelessWidget {
                 5.ph,
                 Text(
                   '${productModel.price} ر.س',
-                  style: getBoldStyle(fontSize: 10.sp, color: AppColors.primaryColor),
+                  style: getBoldStyle(
+                      fontSize: 10.sp, color: AppColors.primaryColor),
                 ),
               ],
             ),
