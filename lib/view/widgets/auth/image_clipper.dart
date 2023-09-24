@@ -20,7 +20,7 @@ class ImageClipper extends StatelessWidget {
             image: AssetImage(AppImages.clipperImage),
             fit: BoxFit.cover,
           ),
-          color: Colors.red,
+          color: Colors.transparent,
         ),
         alignment: Alignment.topCenter,
         child: Image.asset(AppImages.appLogo, width: 70.w, height: 100.h).paddingOnly(top: 65.h),
