@@ -5,9 +5,9 @@ class ContainerClipper extends CustomClipper<Path> {
   Path path = Path();
   @override
   Path getClip(Size size) {
-    path.lineTo(0, 133.h);
-    path.quadraticBezierTo(0, 199.h, size.width * .5, size.height - 90);
-    path.quadraticBezierTo(size.width * .7, size.height * .7, size.width, size.height);
+    path.lineTo(0, 120.h);
+    path.quadraticBezierTo(20.h, 170.h, size.width * .3, size.height - 120.h);
+    path.quadraticBezierTo(size.width * .85, size.height * .63, size.width, size.height - 42);
     path.lineTo(size.width, 0);
     return path;
   }
